@@ -1,0 +1,43 @@
+/* Additional Styles for Image Flow */
+.row{
+	max-width: 100%;
+}
+#top-nav, #side-nav{
+	background: #333;
+}
+.tab-bar .menu-icon span:after{
+	left: 0rem;
+}
+.side-nav{
+	background-color: #333;
+}
+.side-nav li.divider{
+	border-top-color: #444;
+}
+#tool-bar{
+	height: 2rem;
+	margin-bottom: 0;
+	padding: 0.25rem 0.5rem;
+}
+.wpstyle{
+	background-color: #f7f7f7;
+	border-color: #ccc;
+	border-width: 1px;
+	color: #333;
+}
+.wpstyle:hover{
+	background-color: #fff;
+	border-color: #333;
+	border-width: 1px;
+	color: #333;
+}
+#media-top-nav{
+	background-color: rgba(255, 255, 255, .8);
+	border-bottom: solid 1px #ccc;
+}
+#publish-tools{
+	border: solid 1px #ccc;
+}
+#publish-tools hr{
+	margin-top: 0;
+}
