@@ -2,6 +2,9 @@
 .row{
 	max-width: 100%;
 }
+.wrap {
+	padding: 0.5rem 1rem;
+}
 #top-nav, #side-nav{
 	background: #333;
 }
@@ -15,9 +18,15 @@
 	border-top-color: #444;
 }
 #tool-bar{
-	height: 2rem;
+	height: 2.5rem;
 	margin-bottom: 0;
 	padding: 0.25rem 0.5rem;
+}
+#media-modal .tab-bar,
+#media-frame-toolbar{
+	height: 4.25rem;
+	margin-bottom: 0;
+	padding: 0;
 }
 .wpstyle{
 	background-color: #f7f7f7;
@@ -31,10 +40,27 @@
 	border-width: 1px;
 	color: #333;
 }
-#media-top-nav{
-	background-color: rgba(255, 255, 255, .8);
-	border-bottom: solid 1px #ccc;
+#media-modal {
+	padding: 0;
+	min-height: 300px;
 }
+#media-top-nav{
+	background-color: rgba(252, 252, 252, 1);
+	border-bottom: solid 1px #ccc;
+	color: #000;
+}
+#media-frame-toolbar {
+	background-color: rgba(252, 252, 252, 1);
+	border-top: solid 1px #ccc;
+	color: #000;
+	position: absolute;
+	bottom: 0;
+}
+
+#media-frame-toolbar button {
+	margin-left: 0.5rem;
+}
+
 #publish-tools{
 	border: solid 1px #ccc;
 }
