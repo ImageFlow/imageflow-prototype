@@ -22,15 +22,6 @@
 	margin-bottom: 0;
 	padding: 0.25rem 0.5rem;
 }
-#media-modal .tab-bar,
-#media-frame-toolbar{
-	height: 3rem;
-	margin-bottom: 0;
-	padding: 0;
-}
-#media-frame-toolbar{
-	height: 4.25rem;
-}
 .wpstyle{
 	background-color: #f7f7f7;
 	border-color: #ccc;
@@ -43,6 +34,17 @@
 	border-width: 1px;
 	color: #333;
 }
+
+
+#publish-tools{
+	border: solid 1px #ccc;
+}
+#publish-tools hr{
+	margin-top: 0;
+}
+
+/*Modal Styles*/
+
 #media-modal {
 	padding: 0;
 	min-height: 80%;
@@ -50,29 +52,65 @@
 #media-modal .close-reveal-modal{
 	top: 0;
 }
-#media-top-nav{
+#top-toolbar{
 	background-color: rgba(252, 252, 252, 1);
 	border-bottom: solid 1px #ccc;
 	color: #000;
 }
+#top-toolbar label{
+	display: inline-block;
+	margin-left: .5rem;
+}
+.media-frame-title{
+	font-weight: bolder;
+}
+
+#bottom-toolbar {
+	background-color: rgba(252, 252, 252, 1);
+	border-top: solid 1px #ccc;
+	position: absolute;
+	display: none;
+}
+#bottom-toolbar label{
+	font-size: .5rem;
+	padding-bottom: .5rem;
+}
+#bottom-toolbar i{
+	font-size: 1.25rem;
+	padding-top: .5rem;
+}
+#bottom-toolbar button {
+	margin-left: 0.5rem;
+}
+#bottom-toolbar .icon-button, #bottom-toolbar .icon-button label{
+	color: #222;
+	background: #eee;
+}
+#bottom-toolbar .important-icon-button, #bottom-toolbar .important-icon-button label{
+	color: #fff;
+	background: #2ea2cc;
+}
+
+
 #media-frame-content{
 	padding: 1rem 0 1rem 0;
 }
-#media-frame-toolbar {
-	background-color: rgba(252, 252, 252, 1);
-	border-top: solid 1px #ccc;
-	color: #000;
-	position: absolute;
-	bottom: 0;
+
+
+.selected{
+	border: solid 1px green;
 }
 
-#media-frame-toolbar button {
-	margin-left: 0.5rem;
-}
 
-#publish-tools{
-	border: solid 1px #ccc;
+.grid-wrap{	
+	background: #eee;
+	display: table-cell;
+	float: left;
+	padding-bottom: 33%;
+	text-align: center;
+	vertical-align: middle;
 }
-#publish-tools hr{
-	margin-top: 0;
+#media-grid img{
+	max-height: 100%;
+	max-width: 100%;
 }

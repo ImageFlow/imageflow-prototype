@@ -169,7 +169,13 @@
     <script src="../js/foundation.min.js"></script>
     <script>
       $(document).foundation();
-      $(document).ready(function(){$('#media-modal').foundation('reveal', 'open')});
+      $(document).ready(function(){
+	  $('#media-modal').data('reveal-init', {
+	    animation: 'none',
+	    animation_speed: 0,
+	  });
+	  $('#media-modal').foundation('reveal', 'open')
+	});
     </script>
   </body>
 </html>
