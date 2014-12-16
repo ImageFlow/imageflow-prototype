@@ -148,6 +148,12 @@
 	max-width: 100%;
 	height:auto;
 }
+div#tinyMCE {
+	border: 1px solid #d8d8d8;
+	padding: 10px;
+	margin-bottom: 20px;
+	min-height: 400px;
+}
 @media only screen and (min-width: 40.063em){
 
 	.grid-wrap{	

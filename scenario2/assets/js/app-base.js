@@ -19,7 +19,7 @@ app.service('currentImage', function() {
 	this.images = [];
 })
 
-app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http', function( $rootScope, $scope, currentImage, $http ) {
+app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
 	/** OPEN MODAL **/
 	$('#media-modal').foundation('reveal', 'open' );
 	
@@ -59,17 +59,30 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	}
 	
 	$scope.insertImages = function() {
-		console.log( $scope.selectedImages );
-		
+		$scope.selectedImages.images = [];		
 		$.each( $('div.grid-wrap.selected'), function( value, key ) {
 			$scope.selectedImages.images.push( $scope.images[$(this).data('index')] );
 		});
+		$location.path('/');
+		$('#media-modal').foundation('reveal', 'close' );
 		
-		console.log( $scope.selectedImages );
+		$('body').trigger( 'insertImages' );
 	}
 	
 }]);
-app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', function( $rootScope, $scope, currentImage, $http ) {
+
+
+app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
+	
+	$('body').on('insertImages', function() {
+		$.each( currentImage.images, function( key, value ) {
+			$scope.curVal = $('#tinyMCE').html();
+			$scope.newVal = $scope.curVal + '<img src="' + value + '" />';
+			$('#tinyMCE').html( $scope.newVal );
+		});
+	});
+	
+}]);app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', function( $rootScope, $scope, currentImage, $http ) {
 	
 	$scope.selectedImages = currentImage,
 		
