@@ -23,6 +23,8 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	/** OPEN MODAL **/
 	$('#media-modal').foundation('reveal', 'open' );
 	
+	$scope.modalTitle = 'Select Media';
+	
 	$scope.selectedImages = currentImage,
 		
 	$http.get('assets/js/data.json').then(function(res){
@@ -49,8 +51,10 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		if( m > 0 ) {
 			$('#bottom-toolbar').fadeIn();
 			$('#selected-count').text('');
-	      	$('#selected-items').text(m + ' Selected');
-	      	$('#selected-count').text('(' + m + ')');
+			if (m > 1) {
+				$('#selected-items').text(m + ' Selected');
+				$('#selected-count').text('(' + m + ')');
+			}
 		} else {
 			$('#bottom-toolbar').fadeOut();
 			$('#selected-items').text('');
@@ -69,9 +73,11 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		$('body').trigger( 'insertImages' );
 	}
 	
+	$scope.goHome = function(){
+		$location.path('/');
+	}
+	
 }]);
-
-
 app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
 	
 	$('body').on('insertImages', function() {
@@ -82,10 +88,13 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http'
 		});
 	});
 	
-}]);app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', function( $rootScope, $scope, currentImage, $http ) {
+}]);
+app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
 	
 	$scope.selectedImages = currentImage,
-		
+	
+	$scope.modalTitle = 'Add Media';
+	
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images
 	});
@@ -110,13 +119,14 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http'
 		if( m > 0 ) {
 			$('#bottom-toolbar').fadeIn();
 			$('#selected-count').text('');
-	      	$('#selected-items').text(m + ' Selected');
-	      	$('#selected-count').text('(' + m + ')');
+			if (m > 1) {
+				$('#selected-items').text(m + ' Selected');
+				$('#selected-count').text('(' + m + ')');
+			}
 		} else {
 			$('#bottom-toolbar').fadeOut();
 			$('#selected-items').text('');
 		}
-		
 	}
 	
 	$scope.insertImages = function() {
@@ -128,5 +138,9 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http'
 		
 		console.log( $scope.selectedImages );
 	}
+	
+	$('#media-modal').bind('closed', function(){
+		$location.path('/');
+	});
 	
 }]);

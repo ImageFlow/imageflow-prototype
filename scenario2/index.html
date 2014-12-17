@@ -76,12 +76,12 @@
 		<input type="text" placeholder="Enter title here" />
 		<a class="tiny button wpstyle" href="#/mediaGrid">Add Media</a>
 		<div class="row" ng-controller="textAreaCtrl">
-		  <div class="large-12 columns">
+		  <div class="large-12 columns" id="editor">
 		    <div class="panel" id="tool-bar">
 		     Tool Bar
 		    </div>
 		    <div id="tinyMCE"></div>
-		  </div>
+		  </div><!--#editor-->
 		</div>
 	      </div>
 	      
@@ -109,51 +109,12 @@
 	  
 	</section><!--prototype-wrap-->
 	
-	<section class="row" id="imageContainer">
-	  <div class="large-4 columns">
-	    <img src="../assets/00-post-editor.png" />
-	  </div>
-	  <div class="large-8 columns">
-		    <h3>Edit Post Screen</h3>
-		    <h4 class="subheader">Scenario: Add New Image</h4>
-		    <p>A user is in the post editor and decides to add a new image.</p>
-		    <hr />
-		    <ul class="no-bullet inline-list">
-		      <li>Next: <a href="01-media-grid.html">Media Grid</a></li>
-		    </ul>
-	  </div>
-	</section>
-	
 	<a class="exit-off-canvas"></a>
 
       </main>
     </div><!--off-canvas-wrap-->
     
     <script src="../js/vendor/jquery.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(e) {
-      $('#showOriginal').click(function(e){
-	  $('#imageContainer').toggle();
-	if($('#showOriginal').text()=='Show Wireframe'){
-            $('#showOriginal').text('Hide Wireframe');
-	    $('#showOriginal-off').text('Hide Wireframe');
-        }else{
-            $('#showOriginal').text('Show Wireframe');
-	    $('#showOriginal-off').text('Show Wireframe');
-        }
-      });
-      $('#showOriginal-off').click(function(e){
-	  $('#imageContainer').toggle();
-	if($('#showOriginal-off').text()=='Show Wireframe'){
-            $('#showOriginal-off').text('Hide Wireframe');
-	    $('#showOriginal').text('Hide Wireframe');
-        }else{
-            $('#showOriginal-off').text('Show Wireframe');
-	    $('#showOriginal').text('Show Wireframe');
-        }
-      });
-    });
-    </script>
     <script src="../js/foundation.min.js"></script>
     <script>
       $(document).foundation();
