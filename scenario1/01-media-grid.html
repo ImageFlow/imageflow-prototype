@@ -1,17 +1,17 @@
-<ng-include src="'assets/js/templates/modalNav.html?v=1'"></ng-include>
+<ng-include src="'assets/js/templates/modalNav.html'"></ng-include>
 <div class="row" id="media-frame-content">
     <div class="large-12 columns left" id="media-grid">
         <div class="grid-wrap small-4 medium-3 large-2">
-
             <div class="image-wrap" id="add-new">
                 <a href="#/source"><i class="fa fa-plus-circle"></i><label for="add-new">Add New</label></a>
             </div>
         </div>
 
-        <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}">
+        <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-if="$index!=0" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}">
             <div class="image-wrap">
-            	<img src="{{image.medium}}">
-			</div>
+            	<i class="fa fa-check-square-o"></i>
+		<img src="{{image.medium}}">
+	    </div>
         </div>
     </div>
 </div>

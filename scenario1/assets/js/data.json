@@ -1,6 +1,12 @@
 {
 	"images": [
 		{
+		"thumb":"/img/mystery-electricity-140x140.jpg",
+		"medium":"/img/mystery-electricity-229x300.jpg",
+		"large":"/img/mystery-electricity-781x1024.jpg",
+		"full":"/img/mystery-electricity.jpg"
+		},
+		{
 		"thumb":"/img/IMG_20140707_144211-140x140.jpg",
 		"medium":"/img/IMG_20140707_144211-300x300.jpg",
 		"large":"/img/IMG_20140707_144211-1024x1024.jpg",
