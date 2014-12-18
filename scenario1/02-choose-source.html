@@ -1,181 +1,21 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WP Image Flow | Post Edit Screen</title>
-    <link rel="stylesheet" href="../css/foundation.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <script src="../js/vendor/modernizr.js"></script>
-  </head>
-  <body class="off-canvas hide-extras">
-    <div class="off-canvas-wrap" data-offcanvas>
-      <main class="inner-wrap">
-	
-	<section class="row" id="prototype-container" data-equalizer>
-	  
-	  <div class="large-12 columns" id="top-nav">
-	    <nav class="tab-bar" role="navigation">
-		<section class="large-1 small-1 column text-left">
-		  <a href="#" class="left-off-canvas-toggle menu-icon hide-for-large-up"><span></span></a>
-		</section>  
-		<section class="large-3 small-4 column">
-		  <a href="http://example.com">Visit Site</a>
-		</section>
-		<section class="large-2 small-5 column text-right">
-		  <a href="http://example.com">Howdy User</a>
-		</section>
-	    </nav>
-	  </div>
-	  
-	  <!-- mobile off-canvas menu -->
-	  <aside class="left-off-canvas-menu">
-	    <ul class="off-canvas-list" role="navigation">
-	      <li><a href="http://example.com">Dashboard</a></li>
-	      <li class="divider"></li>
-	      <li class="active"><a href="http://example.com">Posts</a></li>
-	      <li><a href="http://example.com">Media</a></li>
-	      <li><a href="http://example.com">Links</a></li>
-	      <li><a href="http://example.com">Pages</a></li>
-	      <li><a href="http://example.com">Comments</a></li>
-	      <li class="divider"></li>
-	      <li>
-		<a href="#" id="showOriginal-off">Hide Wireframe</a>
-	      </li>
-	    </ul>
-	  </aside>
-	  <!-- mobile off-canvas menu -->
-	  <!-- visible menu -->
-	  <div class="large-2 small-2 columns show-for-large" id="side-nav" data-equalizer-watch>
-	    <ul class="side-nav" role="navigation" data-equalizer-watch>
-	      <li><a href="http://example.com">Dashboard</a></li>
-	      <li class="divider"></li>
-	      <li class="active"><a href="http://example.com">Posts</a></li>
-	      <li><a href="http://example.com">Media</a></li>
-	      <li><a href="http://example.com">Links</a></li>
-	      <li><a href="http://example.com">Pages</a></li>
-	      <li><a href="http://example.com">Comments</a></li>
-	      <li class="divider"></li>
-	      <li>
-		<a href="#" id="showOriginal">Hide Wireframe</a>
-	      </li>
-	    </ul>
-	  </div>
-	  <!-- visible menu -->
-	  
-	  <div class="large-10 columns" data-equalizer-watch>
-	    <h2>Add New Post</h2>
-	    
-	    <section class="row" id="edit-form">
-	      
-	      <div class="left large-9 columns">
-		<input type="text" placeholder="Enter title here" />
-		<a class="tiny button wpstyle" data-reveal-id="media-modal">Add Media</a>
-		<div class="row">
-		  <div class="large-12 columns">
-		    <div class="panel" id="tool-bar">
-		     Tool Bar
-		    </div>
-		    <textarea rows="20"></textarea>
-		  </div>
-		</div>
-	      </div>
-	      
-	      <div class="right sidebar large-3 columns clearfix" id="publish-tools">
-		<h5>Publish</h5>
-		<hr />
-		<a class="tiny button wpstyle">Save Draft</a>
-		<a class="tiny button wpstyle right">Preview</a>
-		<ul class="no-bullet">
-		  <li>Status:</li>
-		  <li>Visibility:</li>
-		  <li>Publish</li>
-		  <li>Publicize</li>
-		</ul>
-		<a href="#" class="warning">Move to Trash</a>
-		<a href="#" class="tiny button radius right">Publish</a>
-	      </div>
-	      
-	    </section><!--#edit-form-->
-	  </div>
-	  
-	  <section class="xlarge small-full reveal-modal" id="media-modal" data-reveal>
-	      <nav class="fixed tab-bar" id="media-top-nav">
-	      	<div class="row">
-		    <div class="large-4 medium-3 columns hide-for-small media-frame-title left">
-		      Choose Image Source
-		    </div>
-		    <a class="close-reveal-modal">&#215;</a>
-		</div>
-	      </nav>
-	      <div class="row" id="media-frame-content">
-		<div class="large-12 columns">Modal Content</div>
-	      </div>
-	      <div class="row" id="media-frame-toolbar">
-		<div class="large-4 medium-6 columns right wrap">
-		  <a class="main button small">Button Main</a><a class="secondary button small right">Button Secondary</a>
-		</div>
-	      </div>
-	  </section>
-	  
-	</section><!--prototype-wrap-->
-	
-	<section class="row" id="imageContainer">
-	  <div class="large-4 columns">
-	    <img src="../assets/04-image-source.png" />
-	  </div>
-	  <div class="large-8 columns">
-		    <h3>Edit Post Screen</h3>
-		    <h4 class="subheader">Scenario: Add New Image</h4>
-		    <p>The user chooses between an existing image 'From Device' or from camera. This would be gone if we add the camera icon to the media grid.</p>
-		    <ul class="no-bullet inline-list">
-		      <li>Previous: <a href="01-media-grid.html">Media Grid</a></li>
-		      <li>Alternate: <a href="03a-upload-from-camera.html">From Camera</a></li>
-		      <li>Next: <a href="03-upload-image.html">Upload Image</a></li>
-		    </ul>
-	  </div>
-	</section>
-	
-	<a class="exit-off-canvas"></a>
+<ng-include src="'assets/js/templates/modalNav.html'"></ng-include>
+<div class="row" id="media-frame-content">
+    <div class="large-12 columns left" id="media-grid">
+        <div class="grid-wrap small-4 medium-3 large-2">
+            <div class="image-wrap" id="add-new">
+                <a href="#/source"><label>This Is New</label></a>
+            </div>
+        </div>
 
-      </main>
-    </div><!--off-canvas-wrap-->
-    
-    <script src="../js/vendor/jquery.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(e) {
-      $('#showOriginal').click(function(e){
-	  $('#imageContainer').toggle();
-	if($('#showOriginal').text()=='Show Wireframe'){
-            $('#showOriginal').text('Hide Wireframe');
-	    $('#showOriginal-off').text('Hide Wireframe');
-        }else{
-            $('#showOriginal').text('Show Wireframe');
-	    $('#showOriginal-off').text('Show Wireframe');
-        }
-      });
-      $('#showOriginal-off').click(function(e){
-	  $('#imageContainer').toggle();
-	if($('#showOriginal-off').text()=='Show Wireframe'){
-            $('#showOriginal-off').text('Hide Wireframe');
-	    $('#showOriginal').text('Hide Wireframe');
-        }else{
-            $('#showOriginal-off').text('Show Wireframe');
-	    $('#showOriginal').text('Show Wireframe');
-        }
-      });
-    });
-    </script>
-    <script src="../js/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
-      $(document).ready(function(){
-	  $('#media-modal').data('reveal-init', {
-	    animation: 'none',
-	    animation_speed: 0,
-	  });
-	  $('#media-modal').foundation('reveal', 'open')
-	});
-    </script>
-  </body>
-</html>
+        <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}">
+            <div class="image-wrap">
+            	<img src="{{image}}">
+	    </div>
+        </div>
+    </div>
+</div>
+<ng-include src="'assets/js/templates/modalFooter.html'"></ng-include>
+
+<script type="text/javascript">
+	$(document).foundation();
+</script>
