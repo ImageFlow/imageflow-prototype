@@ -32,14 +32,30 @@ If you are unfamiliar with Angular you can simply make flat HTML views without t
 
 If you are familiar with Angular, or javascript take a look in the assets/js/app-base.js file. This is the heart of the prototype. At the most basic, you can see the routes starting around line 7. These allow Angular to load the correct content as we move through the prototype.
 
-<code>
-$routeProvider.when( '/mediaGrid', {
-		templateUrl: '01-media-grid.html',
-		controller: 'mediaGridCtrl',
+`
+$routeProvider.when( '/mediaGrid', {  
+	templateUrl: '01-media-grid.html',  
+	controller: 'mediaGridCtrl',  
 });
-</code>
+`
 
-The first variable '/mediaGrid' is the path that the app will call. Your href would point to '#/mediaGrid' in this case. The second variable is the name of the file for that view, and the final variable is the name of the controller for that view. Immediately following the routes, are the controllers. These are exactly what they sound like: the controls for the related view. This is where you can write Angular code, or standard javascript, to effect your view. I strongly encourage you to look over the mediaGrid controller as it will give a good indication of how Angular works.
+The first variable '/mediaGrid' is the path that the app will call. Your href would point to '#/mediaGrid' in this case. The second variable is the name of the file for that view, and the final variable is the name of the controller for that view. Immediately following the routes, are the controllers. These are exactly what they sound like: the controls for the related view. This is where you can write Angular code, or standard javascript, to effect your view. I strongly encourage you to look over the mediaGrid controller as it will give a good indication of how Angular works.  
+  
+There is a [w3schools](http://www.w3schools.com/angular/angular_directives.asp) with some of the basic AngularJS directives and functionality we will be using. 
+
+<h4>ng-repeat</h4>
+In each template loaded into the modal that has a grid of images, you will see  
+
+`ng-repeat="image in images track by $index"`  
+
+as an HTML attribute on the `grid-wrap` div. This is similar to a PHP (foreach/while) loop. We are looping through an `images` array and each individual object is defined as `image`. While we are looping we have access to anything defined in that object, but in our use case all we have is `image.src` which is the source path for the image.  
+  
+<h4>ng-click</h4>
+This is similar to the onclick="" html attribute of days gone by. This runs a function in the Angular Controller that we define. For example the HTML template has something with `ng-click="imageSelect( $index, $event )"`and the controller has `$scope.imageSelect = function( index, event) {...}` defined. You don't always need to pass `$index` and `$event` into the function, however in this use case we needed it for additional logic.
+  
+<h4>Further reading</h4>
+[Roy](http://www.roysivan.com/lets-build-wordpress-app-together-part-iii/#.VJMcSYrF_IA) is also blogging about his build of an open source AngularJS app built with WP. It has some AngularJS tutorials and overview concepts. You can find his blog entries related to the project at [ttp://www.roysivan.com/category/wordpress/building-an-app-with-wordpress/](http://www.roysivan.com/category/wordpress/building-an-app-with-wordpress/)
+
 
 <h3>Images</h3>
 All images that are used in the prototype are in the img folder in the root, and are delivered to the app via data.json in the assets/js folder.
