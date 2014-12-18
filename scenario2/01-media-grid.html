@@ -10,7 +10,7 @@
 
         <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}">
             <div class="image-wrap">
-            	<img src="{{image}}">
+            	<img src="{{image.medium}}">
 			</div>
         </div>
     </div>

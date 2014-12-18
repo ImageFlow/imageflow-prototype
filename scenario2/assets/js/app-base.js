@@ -65,7 +65,7 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	$scope.insertImages = function() {
 		$scope.selectedImages.images = [];		
 		$.each( $('div.grid-wrap.selected'), function( value, key ) {
-			$scope.selectedImages.images.push( $scope.images[$(this).data('index')] );
+			$scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
 		});
 		$location.path('/');
 		$('#media-modal').foundation('reveal', 'close' );
@@ -133,7 +133,7 @@ app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', 
 		console.log( $scope.selectedImages );
 		
 		$.each( $('div.grid-wrap.selected'), function( value, key ) {
-			$scope.selectedImages.images.push( $scope.images[$(this).data('index')] );
+			$scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
 		});
 		
 		console.log( $scope.selectedImages );
