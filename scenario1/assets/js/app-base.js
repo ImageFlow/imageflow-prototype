@@ -13,6 +13,10 @@ app.config( function( $routeProvider ) {
 		templateUrl: '02-choose-source.html',
 		controller: 'sourceCtrl',
 	});
+	$routeProvider.when( '/uploading', {
+		templateUrl: '04-media-grid-uploading.html',
+		controller: 'uploadingCtrl',
+	});
 })
 
 app.service('currentImage', function() {
@@ -34,6 +38,7 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	$scope.imageSelect = function(key, e) {
 		if( e.target.localName == 'img' || $(e.target).hasClass('image-wrap') ){
 			$(e.target).parents('div.grid-wrap').toggleClass('selected');
+			$(e.target).siblings('i.fa').toggle();
 		} else {
 			$(e.target).toggleClass('selected');
 		}
@@ -90,18 +95,32 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http'
 	
 }]);
 app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
+		
+	$scope.modalTitle = 'Upload File';
+	
+	$scope.goHome = function(){
+		$location.path('/');
+	}
+	
+}]);
+app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
 	
 	$scope.selectedImages = currentImage,
 	
-	$scope.modalTitle = 'Add Media';
+	$scope.modalTitle = 'Select Media';
 	
+	$scope.selectedImages = currentImage,
+		
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images
-	});
+	});		
+	
+	 $('#uploading').delay(200).fadeOut('slow');
 	
 	$scope.imageSelect = function(key, e) {
 		if( e.target.localName == 'img' || $(e.target).hasClass('image-wrap') ){
 			$(e.target).parents('div.grid-wrap').toggleClass('selected');
+			$(e.target).siblings('i.fa').toggle();
 		} else {
 			$(e.target).toggleClass('selected');
 		}
@@ -127,20 +146,22 @@ app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', 
 			$('#bottom-toolbar').fadeOut();
 			$('#selected-items').text('');
 		}
+		
 	}
 	
 	$scope.insertImages = function() {
-		console.log( $scope.selectedImages );
-		
+		$scope.selectedImages.images = [];		
 		$.each( $('div.grid-wrap.selected'), function( value, key ) {
 			$scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
 		});
+		$location.path('/');
+		$('#media-modal').foundation('reveal', 'close' );
 		
-		console.log( $scope.selectedImages );
+		$('body').trigger( 'insertImages' );
 	}
 	
-	$('#media-modal').bind('closed', function(){
+	$scope.goHome = function(){
 		$location.path('/');
-	});
+	}
 	
 }]);

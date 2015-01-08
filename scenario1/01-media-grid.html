@@ -1,134 +1,22 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WP Image Flow | Media Grid</title>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  </head>
-  <body>
-    <nav class="fixed tab-bar" id="top-toolbar">
-      <div class="row">
-	  <div class="large-4 medium-3 columns hide-for-small media-frame-title left">
-	    Select Media
-	  </div>
-	  <div class="large-3 medium-3 small-5 columns preview">
-	    <i class="fa fa-search"></i><label class="modal" for="Search">Search</label>
-	  </div>
-	  <div class="large-3 medium-3 small-5 columns preview">
-	    <i class="fa fa-sliders"></i><label class="modal" for="Filter">Filter</label>
-	  </div>
-	  <a class="close-reveal-modal">&#215;</a>
-      </div>
-    </nav>
-    <div class="row" id="media-frame-content">
-      <div class="large-12 columns left" id="media-grid">
-	  <div class="grid-wrap small-4 medium-3 large-2">
-	    <a href="03-upload-image.html" target="media-modal">
-	    <div class="image-wrap" id="add-new">
-	      <i class="fa fa-plus-circle"></i><label>Add New</label>
-	    </div>
-	    </a>
-	  </div>
-	  <div class="grid-wrap small-4 medium-3 large-2 columns">
-	    <div class="image-wrap">
-	      <img src="http://lorempixel.com/400/300" />
-	    </div>
-	  </div>
-	  <div class="grid-wrap small-4 medium-3 large-2 columns">
-	    <div class="image-wrap"> 
-	      <img src="http://lorempixel.com/400/120" />
-	    </div>
-	  </div>
-	  <div class="grid-wrap small-4 medium-3 large-2 columns">
-	    <div class="image-wrap"> 
-	      <img src="http://lorempixel.com/200/300" />
-	    </div>
-	  </div>
-	  <div class="grid-wrap small-4 medium-3 large-2 columns">
-	    <div class="image-wrap"> 
-	      <img src="http://lorempixel.com/500/150" />
-	    </div>
-	  </div>
-	  <div class="grid-wrap small-4 medium-3 large-2 columns">
-	    <div class="image-wrap">
-	      <img src="http://lorempixel.com/400/300" />
-	    </div>
-	  </div><div class="grid-wrap small-4 medium-3 large-2 columns">
-	    <div class="image-wrap">
-	      <img src="http://lorempixel.com/400/300" />
-	    </div>
-	  </div>
-      </div>
-    </div>
-    <div class="row" id="bottom-toolbar">
-      <div class="medium-6 columns hide-for-small" id="thumbs">
-	<div class="2-columns">
-	  <span id="selected-items" class="small"></span>
-	  <span class="small" id="clear">Clear Selection</span>
-	</div>
-      </div>
-      <div id="buttons" class="medium-6 columns">
-	<div class="large-4 small-4 columns text-center icon-button">
-	  <i class="fa fa-file-image-o" id="view-button"></i>
-	  <label for="View Button">View</label>	
-	</div>
-	<div class="large-4 small-4 columns text-center important-icon-button">
-	  <i class="fa fa-arrow-circle-o-down" id="insert-button"></i>
-	  <label for="Insert Button">Insert<span id="selected-count"></span></label>
-	</div>
-	<div class="large-4 small-4 columns text-center icon-button">
-	  <i class="fa fa-ellipsis-h" id="more-button"></i>
-	  <label for="More Button">More</label>
-	</div>
-      </div>
-    </div>
+<ng-include src="'assets/js/templates/modalNav.html'"></ng-include>
+<div class="row" id="media-frame-content">
+    <div class="large-12 columns left" id="media-grid">
+        <div class="grid-wrap small-4 medium-3 large-2">
+            <div class="image-wrap" id="add-new">
+                <a href="#/source"><i class="fa fa-plus-circle"></i><label for="add-new">Add New</label></a>
+            </div>
+        </div>
 
-    <script>
-      $(document).foundation();
-      
-      //bottom bar appearance	
-      $('#media-frame-content').on("selectedCount", function(event, m){
-	if (m > 0) {
-	  $('#bottom-toolbar').fadeIn();
-	  $('#selected-count').text('');
-	  $('#selected-items').text(m + ' Selected');
-	  
-	}
-	if (m == 0 && $('#bottom-toolbar').is(':visible')) {
-	  $('#bottom-toolbar').fadeOut();
-	  $('#selected-items').text('');
-	}
-	if (m > 1) {
-	  $('#selected-count').text('(' + m + ')');
-	}
-      });
-      
-      //selected behavior
-      $('#media-frame-content div.grid-wrap').click(function(){
-	if($(this).hasClass('selected')){
-	  $(this).removeClass('selected')
-	  selected = $('.selected').length;
-	}else{
-	  $(this).addClass('selected');
-	  selected = $('.selected').length;
-	}
-	$(this).trigger("selectedCount", [selected]);
-	});
-      
-      //clear selection
-      $('#clear').click(function(){
-	$('.selected').removeClass('.selected');
-      })
-      
-      //mobile functions for add new
-      $(window).resize(function(){     
+        <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-if="$index!=0" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}">
+            <div class="image-wrap">
+            	<i class="fa fa-check-square-o"></i>
+		<img src="{{image.medium}}">
+	    </div>
+        </div>
+    </div>
+</div>
+<ng-include src="'assets/js/templates/modalFooter.html'"></ng-include>
 
-	      if ($(window).width() <= 720){
-              
-	      }
-       
-       });
-    </script>
-  </body>
-</html>
+<script type="text/javascript">
+	$(document).foundation();
+</script>
