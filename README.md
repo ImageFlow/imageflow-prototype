@@ -3,11 +3,13 @@ imageflow-prototype
 
 A working responsive prototype of the new WordPress Image Flow - no integration with WordPress data.
 
+[You can find the front end of the prototype here](http://flow.teamadesign.net/).
+
 We'll be exploring the following scenarios:
 
-1. User Adds New Image To Post (edited) (ARIS) (not done)
+1. [User Adds New Image To Post](http://flow.teamadesign.net/scenario1/) (edited) (ARIS) (not done)
 
-2. User Adds Existing Image to Post (ARIS, ROY) (not done)
+2. [User Adds Existing Image to Post ](http://flow.teamadesign.net/scenario2/)(ARIS, ROY) (not done)
 
 3. User Edits Existing Image and Adds It To Post
 
