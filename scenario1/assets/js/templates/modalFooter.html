@@ -2,6 +2,7 @@
     <div class="medium-6 columns hide-for-small" id="thumbs">
         <div class="2-columns">
             <span id="selected-items" class="small"></span> <span class="small" id="clear" ng-click="deSelect()">Clear Selection</span>
+            <img ng-repeat="image in selectedImages.images track by $index"  src="{{image}}" style="max-height:60px !important; " />
         </div>
     </div>
 

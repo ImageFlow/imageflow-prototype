@@ -13,9 +13,10 @@
 		<img src="{{image.medium}}">
 	    </div>
         </div>
+        <pre> {{selectedImages.images | json }} </pre>
     </div>
 </div>
-<ng-include src="'assets/js/templates/modalFooter.html'"></ng-include>
+<ng-include src="'assets/js/templates/modalFooter.html?v=2.1.2'"></ng-include>
 
 <script type="text/javascript">
 	$(document).foundation();

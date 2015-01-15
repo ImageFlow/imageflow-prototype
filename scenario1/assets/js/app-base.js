@@ -24,12 +24,14 @@ app.service('currentImage', function() {
 })
 
 app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
+	
 	/** OPEN MODAL **/
 	$('#media-modal').foundation('reveal', 'open' );
 	
 	$scope.modalTitle = 'Select Media';
 	
-	$scope.selectedImages = currentImage,
+	$scope.selectedImages = currentImage;
+	$scope.selectedImages.images = [];
 		
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images
@@ -37,10 +39,22 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	
 	$scope.imageSelect = function(key, e) {
 		if( e.target.localName == 'img' || $(e.target).hasClass('image-wrap') ){
-			$(e.target).parents('div.grid-wrap').toggleClass('selected');
+			var obj = $(e.target).parents('div.grid-wrap');
+			obj.toggleClass('selected');
 			$(e.target).siblings('i.fa').toggle();
+			var img = $scope.images[obj.data('index')].large;
+			
 		} else {
-			$(e.target).toggleClass('selected');
+			var obj = $(e.target);
+			obj.toggleClass('selected');
+			var img = $scope.images[obj.data('index')].large;
+		}
+		
+		if( !obj.hasClass('selected') ){
+			var index = $scope.selectedImages.images.indexOf( img );
+			$scope.selectedImages.images.splice( index, 1 );
+		} else {
+			$scope.selectedImages.images.push( img );
 		}
 		$scope.showFooter();
 	}
@@ -68,10 +82,6 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	}
 	
 	$scope.insertImages = function() {
-		$scope.selectedImages.images = [];		
-		$.each( $('div.grid-wrap.selected'), function( value, key ) {
-			$scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
-		});
 		$location.path('/');
 		$('#media-modal').foundation('reveal', 'close' );
 		
