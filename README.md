@@ -25,9 +25,18 @@ The prototype is largely based on HTML/CSS/javascript, and is meant to be simple
 If you want to participate, choose a scenario that is not claimed (no name behind it) and add your name to the scenario. If you'd rather work on something that is already claimed, get in touch with those folks in the Slack channel.
 
 <h3>Basics</h3>
-Clone the Angular branch down to your local machine. You'll see that there are a number of Scenario Folders. If there is a scenario that is similar to your choice and has had work finished, duplicate that folder and name it correctly. If none are similar, duplicate the 'Scenario1' folder.
+Clone the Master branch down to your local machine. You'll see that there are a number of Scenario Folders. If there is a scenario that is similar to your choice and has had work finished, duplicate that folder and name it correctly. If none are similar, duplicate the 'Scenario1' folder.
 
 Inside the folder you will see an index.html file, and a number of other pages. The index file is the main WordPress admin area and post editor that the prototype is launched from. You should not need to edit this file. The other pages are views that are presented in the modal. The first is the media-grid for choosing an image, open it up and you will see that it is largely straightforward HTML. You'll notice that at the top and bottom are <code>ng-include</code> tags. These are used to include a header and footer for the modal. You can see these files in the assets/js/templates folder. These are, again, straight-forward HTML files that are simply broken out to make things easier when we repeat functionality across the prototype. If you need to create a new header or footer, add them to the templates file and change the path in your view.
+
+<h3>Foundation</h3>
+We are using the Foundation framework for our grid and responsive styles. Please try and lean on the framework as much as possible to save time and keep things consistent. You can find useful info to start here:
+
+[Grid CSS](http://foundation.zurb.com/docs/components/grid.html)
+[Responsive Visibility Styles](http://foundation.zurb.com/docs/components/visibility.html)
+[Helpful Classes](http://foundation.zurb.com/docs/utility-classes.html)
+
+Please don't feel restricted by Foundation, some of what we need to do in this prototype falls outside of what Foundation is addressing, if you are battling too hard, just go your own way.
 
 <h3>Angular.js</h3>
 If you are unfamiliar with Angular you can simply make flat HTML views without the fancy javascript stuff. Once that is done, let the group know on Slack, submit a pull request and we will hammer out the interactions and provide feedback.
