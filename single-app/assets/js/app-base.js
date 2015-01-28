@@ -125,10 +125,9 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	$scope.selectedImages = currentImage,
 		
 	$http.get('assets/js/data.json').then(function(res){
-		$scope.images = res.data.images
-	});		
-	
-	 $('#uploading').delay(200).fadeOut('slow');
+		$scope.images = res.data.images;
+		$('#uploading').delay(200).fadeOut('slow');
+	});
 	
 	$scope.imageSelect = function(key, e) {
 		if( e.target.localName == 'img' || $(e.target).hasClass('image-wrap') ){
