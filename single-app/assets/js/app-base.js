@@ -14,6 +14,10 @@ app.config( function( $routeProvider ) {
 		templateUrl: '02-choose-source.html',
 		controller: 'sourceCtrl',
 	});
+	$routeProvider.when( '/select', {
+		templateUrl: '03-upload-image.html',
+		controller: 'sourceCtrl',
+	});
 	$routeProvider.when( '/uploading', {
 		templateUrl: '04-media-grid-uploading.html',
 		controller: 'uploadingCtrl',
