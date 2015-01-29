@@ -63,8 +63,12 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	}
 	
 	$scope.deSelect = function(){
-		$('div.grid-wrap.selected').removeClass('selected');
+		$('div.grid-wrap.selected').each(function(){
+			$(this).removeClass('selected');
+			$(this).find('i.fa').hide();
+		})
 		$scope.showFooter();
+		$scope.selectedImages.images = [];
 	}
 	
 	$scope.showFooter = function() {
