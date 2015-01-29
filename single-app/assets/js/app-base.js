@@ -137,10 +137,22 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	
 	$scope.imageSelect = function(key, e) {
 		if( e.target.localName == 'img' || $(e.target).hasClass('image-wrap') ){
-			$(e.target).parents('div.grid-wrap').toggleClass('selected');
+			var obj = $(e.target).parents('div.grid-wrap');
+			obj.toggleClass('selected');
 			$(e.target).siblings('i.fa').toggle();
+			var img = $scope.images[obj.data('index')].large;
+			
 		} else {
-			$(e.target).toggleClass('selected');
+			var obj = $(e.target);
+			obj.toggleClass('selected');
+			var img = $scope.images[obj.data('index')].large;
+		}
+		
+		if( !obj.hasClass('selected') ){
+			var index = $scope.selectedImages.images.indexOf( img );
+			$scope.selectedImages.images.splice( index, 1 );
+		} else {
+			$scope.selectedImages.images.push( img );
 		}
 		$scope.showFooter();
 	}
