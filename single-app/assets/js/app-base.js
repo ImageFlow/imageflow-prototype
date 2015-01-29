@@ -130,7 +130,9 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images;
-		$('#uploading').delay(200).fadeOut('slow');
+		setTimeout(function(){
+			$('#uploading').fadeOut('slow');	
+		}, 500 );
 	});
 	
 	$scope.imageSelect = function(key, e) {
