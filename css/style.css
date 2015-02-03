@@ -186,7 +186,7 @@ div#tinyMCE {
 /*Full Width*/
 
 #full-width-area {
-    height: 470px;
+    height: 500px;
     overflow: hidden;
     padding: 10px;
     position: relative;
@@ -212,7 +212,7 @@ div#tinyMCE {
 	position: absolute;
     top: 0px;
     left: 0px;
-	border: solid 1px white;
+	/*border: solid 1px white;*/
     height: 100%;
     width: 80%;
     height: 440px;
@@ -264,6 +264,10 @@ div#tinyMCE {
 	font-size: 1.25rem;
 	z-index: 100;
 	color: #2ea2cc;
+}
+
+.fw #bottom-toolbar {
+    display: block;
 }
 
 .selected-pic-actions {
@@ -318,4 +322,29 @@ margin-right: 10px;
 		margin: 0.9375em;
 	}
 
+}
+
+@media only screen and (max-width: 40em) { 
+
+    .fullwidth-wrap {
+        margin-left: -100px;
+        width: 100%;
+        top: 0px !important;
+        padding: 0px;
+    }
+    .fullwidth-wrap i {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        font-size: 3.5rem;
+    }
+    .right-arrow {
+        display: none;
+    }
+    .left-arrow {
+        display: none;
+    }  
+    #cg-button {
+        font-size: 0.6em;
+    }
 }

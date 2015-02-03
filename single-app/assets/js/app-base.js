@@ -35,15 +35,15 @@ app.service('currentImage', function() {
 
 
 app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
-	
+    
 	/** OPEN MODAL **/
 	$('#media-modal').foundation('reveal', 'open' );
 	
 	$scope.modalTitle = 'Select Media';
 	
 	$scope.selectedImages = currentImage;
-	$scope.selectedImages.images = [];
-		
+    $scope.selectedImages.images = [];	
+    
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images
 	});
@@ -223,18 +223,31 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
     
     $scope.$on('$viewContentLoaded', function() {
         $('#grid_menu').css("display","none");  
-        $('#full_width_menu').css("display","block"); 
+        $('#full_width_menu').css("display","block");      
     });
-    
+
     // Start Position
     $scope.$on('onRepeatLast', function(scope, element, attrs){
+        
+        //Size adjust
+        mediamodalheight = parseInt( $('#media-modal').css("height") );
+        aux = mediamodalheight-132; 
+        
         positioncount= 100;
         $('div.fullwidth-wrap img').each(function(index, value) { 
             var obj = $(this).parents('div.fullwidth-wrap');            
             if($.inArray($(this).attr('src'),currentImage.images)>-1){
                 obj.toggleClass('selected');
-                //$(this).siblings('i.fa').toggle();
                 $(this).siblings('i.fa').css("display","block");
+                var m = currentImage.images.length;
+                if( m > 0 ) {
+                    $('#bottom-toolbar').fadeIn();
+                    $('#selected-count').text('');
+                    if (m > 1) {
+                        $('#selected-items').text(m + ' Selected');
+                        $('#selected-count').text('(' + m + ')');
+                    }
+                }                 
             } else {
                 $(this).siblings('i.fa').css("display","block");              
             }
@@ -242,8 +255,23 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
             obj.css( "top", 12 );
             obj.css( "left", positioncount );
             positioncount=positioncount+1000;
+
+            //Size adjust
+           /* $(this).css("max-height",aux); 
+            if($(this).height() < aux ) {
+                aux2 = (aux - $(this).height() ) / 2 ;
+                $(this).css("top", aux2);   
+            }*/            
+            
         });
-        $scope.showFooter();        
+        
+        //Size adjust
+
+        $('.fw-image-wrap').css("height",aux);  
+        $('.fullwidth-wrap').css("height",aux);         
+        $('#cg-button').css("display", "inline"); 
+        $('#fw-button').css("display", "none");        
+        
     });
     
     // Click RIGHT
@@ -260,7 +288,8 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
             }); 
         }
     });
-    
+
+
     //Click LEFT
     $('a.left-arrow').click(function() {      
         if (( parseInt($('div.fullwidth-wrap').first().css("left")) < 100 )
@@ -274,7 +303,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
                 $(this).css("left", leftposition);   
             });
         }
-    });
+    }); 
     
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images;
@@ -314,6 +343,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		if( m > 0 ) {
 			$('#bottom-toolbar').fadeIn();
 			$('#selected-count').text('');
+            $('#selected-items').text('');            
 			if (m > 1) {
 				$('#selected-items').text(m + ' Selected');
 				$('#selected-count').text('(' + m + ')');
@@ -324,7 +354,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		}
 		
 	}
-	
+    
 	$scope.insertImages = function() {
 		$location.path('/');
 		$('#media-modal').foundation('reveal', 'close' );
@@ -336,5 +366,9 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		$location.path('/');
 	}
 
+	$scope.gobackgrid = function() {
+        $scope.saveselectedimages = 1 ;
+        window.location.href = "http://imageflow.pabloperea.com/single-app/#/mediaGrid";
+	}
     
 }]);
