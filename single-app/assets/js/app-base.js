@@ -33,12 +33,14 @@ app.service('currentImage', function() {
 	this.images = [];
 })
 
-
 app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
     
 	/** OPEN MODAL **/
-	$('#media-modal').foundation('reveal', 'open' );
-	
+
+    if($scope.secondtime===1) {
+    } else {        
+	   $('#media-modal').foundation('reveal', 'open' );
+    }
 	$scope.modalTitle = 'Select Media';
 	
 	$scope.selectedImages = currentImage;
@@ -47,7 +49,7 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images
 	});
-	
+    
 	$scope.imageSelect = function(key, e) {
 		if( e.target.localName == 'img' || $(e.target).hasClass('image-wrap') ){
 			var obj = $(e.target).parents('div.grid-wrap');
@@ -120,7 +122,9 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http'
 	
 }]);
 app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
-		
+
+	$rootScope.secondtime = 1;    
+    
 	$scope.modalTitle = 'Upload File';
 	
 	$scope.goHome = function(){
@@ -129,7 +133,9 @@ app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', 
 	
 }]);
 app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
-	
+
+	$rootScope.secondtime = 1;    
+    
 	$scope.selectedImages = currentImage,
 	
 	$scope.modalTitle = 'Select Media';
@@ -215,9 +221,9 @@ app.directive('onLastRepeat', function() {
 app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
     
 	//$('#media-modal').foundation('reveal', 'open' );	
+	$rootScope.secondtime = 1;
     
 	$scope.modalTitle = 'Full Width View';
-	
 	$scope.selectedImages = currentImage;
 	//$scope.selectedImages.images = [];
     
@@ -288,7 +294,10 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
             }); 
         }
     });
-
+   
+    $("#full-width-area").on("swiperight",function(){
+      alert("Hello");
+    });
 
     //Click LEFT
     $('a.left-arrow').click(function() {      
@@ -366,9 +375,9 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		$location.path('/');
 	}
 
-	$scope.gobackgrid = function() {
+	/*$scope.gobackgrid = function() {
         $scope.saveselectedimages = 1 ;
         window.location.href = "http://imageflow.pabloperea.com/single-app/#/mediaGrid";
-	}
+	}*/
     
 }]);

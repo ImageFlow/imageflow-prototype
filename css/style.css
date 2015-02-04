@@ -338,6 +338,12 @@ margin-right: 10px;
         left: 40px;
         font-size: 3.5rem;
     }
+    .fullwidth-wrap.selected i{
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        font-size: 3.5rem;
+    }
     .right-arrow {
         display: none;
     }
