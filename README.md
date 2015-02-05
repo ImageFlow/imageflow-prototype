@@ -1,15 +1,19 @@
 imageflow-prototype
 ===================
 
-A working responsive prototype of the new WordPress Image Flow - no integration with WordPress data. <em>N.B. There has been some concern that we are trying to push for integtation of Angular.js into core through this prototype. This is <strong>not</strong> thse case. We are simply using tools that can help us quickly build the most high functioning, representative prototype possible. Very little of this code will go into the feature plugin, all of the concepts that are proven out with the prototype will.</em> At this juncture of the project 01/15 we have been working towards this point for 6 months, and have spent a solid month and a half going down the Angular.js path, there is little to be gained by re-treading this road. Feel free to jump in and help out, but using a bit of Angular (if you want to work with js) is part of the deal.
+A working responsive prototype of the new WordPress Image Flow - no integration with WordPress data. 
+
+<em>N.B. There has been some concern that we are trying to push for integtation of Angular.js into core through this prototype. This is <strong>not</strong> thse case. We are simply using tools that can help us quickly build the most high functioning, representative prototype possible. Very little of this code will go into the feature plugin, all of the concepts that are proven out with the prototype will.</em> 
+
+At this juncture of the project (01/15) we have been working towards this point for 6 months, and have spent a solid month and a half going down the Angular.js path, there is little to be gained by re-treading this road. Feel free to jump in and help out, but using a bit of Angular (if you want to work with js) is part of the deal.
 
 [You can find the front end of the prototype here](http://flow.teamadesign.net/).
 
 We'll be exploring the following scenarios:
 
-1. [User Adds New Image To Post](http://flow.teamadesign.net/scenario1/) (edited) (ARIS) (not done)
+1. [User Adds New Image To Post](http://flow.teamadesign.net/scenario1/) (ARIS)
 
-2. [User Adds Existing Image to Post ](http://flow.teamadesign.net/scenario2/)(ARIS, ROY) (not done)
+2. [User Adds Existing Image to Post ](http://flow.teamadesign.net/scenario2/)(ARIS, ROY, PABLOE) (almost done)
 
 3. User Edits Existing Image and Adds It To Post
 
