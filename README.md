@@ -11,15 +11,17 @@ At this juncture of the project (01/15) we have been working towards this point 
 
 We'll be exploring the following scenarios:
 
-1. [User Adds New Image To Post](http://flow.teamadesign.net/scenario1/) (ARIS)
+1. [User Adds New Image To Post](http://flow.teamadesign.net/scenario1/) (ARIS, ROY) DONE
 
-2. [User Adds Existing Image to Post ](http://flow.teamadesign.net/scenario2/)(ARIS, ROY, PABLOE) (almost done)
+2. [User Adds Existing Image to Post ](http://flow.teamadesign.net/scenario2/)(ARIS, ROY, PABLO) (almost done)
+
+2b. User Edits Metadata of Existing Image and Inserts into Post
 
 3. User Edits Existing Image and Adds It To Post
 
 4. User Creates A Gallery
 
-5. User Inserts Multiple Pieces Into Post
+5. User Inserts Multiple Pieces Into Post (ARIS, ROY, PABLO) DONE
 
 6. User Edits Image that is already inserted
 
