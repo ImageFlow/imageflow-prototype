@@ -15,9 +15,7 @@ We'll be exploring the following scenarios:
 
 2. [User Adds Existing Image to Post ](http://flow.teamadesign.net/scenario2/)(ARIS, ROY, PABLO) (almost done)
 
-2b. User Edits Metadata of Existing Image and Inserts into Post
-
-3. User Edits Existing Image and Adds It To Post
+3. User Edits Existing Image and Adds It To Post <br />3a. User Edits Metadata of Existing Image and Inserts into Post
 
 4. User Creates A Gallery
 
