@@ -1,0 +1,20 @@
+<ng-include src="'assets/js/templates/modalNav-fw.html?v=2.1.6'"></ng-include>
+<div class="row" id="media-frame-content">
+    <div class="large-12 columns left" id="full-width-area">
+        <div class="fullwidth-wrap small-12 medium-12 large-10 columns" ng-repeat="image in images track by $index" ng-if="$index!=0" ng-click="imageSelect( $index, $event )" data-index="{{$index}}" on-last-repeat>
+            <div class="fw-image-wrap">
+            	<i class="fa fa-check-square-o"></i>
+		<img src="{{image.large}}">
+	    </div>
+        </div>
+        <a class="left-arrow"><</a>        
+        <a class="right-arrow">></a>
+    </div>
+</div>
+<div class="fw">
+    <ng-include src="'assets/js/templates/modalFooter-fw.html'"></ng-include>
+</div>
+
+<script type="text/javascript">
+	$(document).foundation();
+</script>

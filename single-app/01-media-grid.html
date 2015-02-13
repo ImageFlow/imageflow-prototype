@@ -10,10 +10,9 @@
         <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-if="$index!=0" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}">
             <div class="image-wrap">
             	<i class="fa fa-check-square-o"></i>
-		<img src="{{image.medium}}">
+		<img src="{{image.large}}">
 	    </div>
         </div>
-        <pre> {{selectedImages.images | json }} </pre>
     </div>
 </div>
 <ng-include src="'assets/js/templates/modalFooter.html?v=2.1.2'"></ng-include>

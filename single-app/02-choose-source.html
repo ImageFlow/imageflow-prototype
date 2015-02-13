@@ -1,0 +1,30 @@
+<ng-include src="'assets/js/templates/modalAdd.html'"></ng-include>
+<div class="row hide-for-small" id="media-frame-content">
+    <div class="large-12 columns text-center"id="upload-area">
+	<p>Drag and Drop files anywhere on this screen to upload.</p>
+	<p>Or</p>
+        <a href="#/select" class="button">Select Files From Your Device</a>
+	<p><small>Maximum Upload Size is Infinite</small></p>
+    </div>
+    <div class="large-12 columns" id="from-url">
+	<label class="hide-for-small" for="URL">Insert From URL:</label>
+	<input class="large-10 columns" type="text" name="URL" id="URL" placeholder="Enter the complete image URL" />
+    </div>
+    <div class="large-6 columns">
+	<input type="text" name="Title" id="Title" placeholder="Title Your Image" />
+    </div>
+    <div class="large-2 columns">
+	<a href="#/uploading" class="button small wpstyle">Insert Image</a>
+    </div>
+</div>
+<div class="row hide-for-medium-up">
+    <div class="small-12 columns text-center" id="mobile-upload">
+	<p class="info panel">Native Phone Functionality for Uploading or Taking A Picture Will Happen Here.</p>
+	<a href="#/uploading" class="button small">Upload</a>
+    </div>
+</div>
+<ng-include src="'assets/js/templates/modalFooter.html'"></ng-include>
+
+<script type="text/javascript">
+	$(document).foundation();
+</script>

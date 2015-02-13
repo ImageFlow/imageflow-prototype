@@ -142,6 +142,9 @@ div#tinyMCE {
 	top: 0;
 	left: 0;
 }
+.image-wrap:hover {
+    cursor: pointer;
+}
 .image-wrap img {
 	position: relative;
 	text-align: center;
@@ -176,6 +179,114 @@ div#tinyMCE {
 	display: inline-block;
 }
 
+#insert-button:hover {
+    cursor: pointer;
+}
+
+/*Full Width*/
+
+#full-width-area {
+    height: 500px;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+}
+#full-width-area .right-arrow {
+    position: absolute;
+    top: 200px;
+    right: 50px;
+    font-size: 50px;   
+}
+#full-width-area .left-arrow {
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    font-size: 50px;   
+}
+.fullwidth-wrap{	
+	background: #eee;
+	/*float: left;*/
+	text-align: center;
+	vertical-align: middle;
+	margin: 0;
+	position: absolute;
+    top: 0px;
+    left: 0px;
+	/*border: solid 1px white;*/
+    height: 100%;
+    width: 80%;
+    height: 440px;
+    /*margin-left: 100px;*/
+}
+.fullwidth-wrap.transi{
+    transition: all 2s ease 0s;
+    -webkit-transition: all 2s ease 0s;
+    -moz-transition: all 2s ease 0s;  
+}
+.fullwidth-wrap.selected i{
+	position: absolute;
+	bottom: 18px;
+	left: 30px;
+	font-size: 4.25rem;
+	z-index: 100;
+	color: #2ea2cc;
+}
+.fullwidth-wrap i{
+	position: absolute;
+	bottom: 18px;
+	left: 30px;
+	font-size: 4.25rem;
+	z-index: 100;
+	color: #dddddd;
+}
+.fullwidth-wrap i:hover{
+    cursor: pointer;
+}
+.fw-image-wrap{
+	width: 100%;
+	height: 100%;
+}
+.fw-image-wrap img {
+	position: relative;
+	text-align: center;
+	max-height: 100%;
+	max-width: 100%;
+	height:auto;
+	width:auto;
+}
+.fw-image-wrap i{
+	display: none;
+}
+.fw-selected i{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 1.25rem;
+	z-index: 100;
+	color: #2ea2cc;
+}
+
+.fw #bottom-toolbar {
+    display: block;
+}
+
+.selected-pic-actions {
+position: relative;
+float: left;
+padding-top: 6px;
+margin-right: 10px;
+}
+.selected-pic-actions span {
+    font-size: 0.8em;
+}
+.selected-pic-actions #clear {
+    position: relative;
+    top: -4px;
+    color: #2ea2cc;
+}
+.selected-pic-actions #clear:hover {   
+    cursor: pointer;
+}
 /*Upload Page*/
 #upload-area, #mobile-upload{
 	padding: 5rem;
@@ -211,4 +322,35 @@ div#tinyMCE {
 		margin: 0.9375em;
 	}
 
+}
+
+@media only screen and (max-width: 40em) { 
+
+    .fullwidth-wrap {
+        margin-left: -100px;
+        width: 100%;
+        top: 0px !important;
+        padding: 0px;
+    }
+    .fullwidth-wrap i {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        font-size: 3.5rem;
+    }
+    .fullwidth-wrap.selected i{
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        font-size: 3.5rem;
+    }
+    .right-arrow {
+        display: none;
+    }
+    .left-arrow {
+        display: none;
+    }  
+    #cg-button {
+        font-size: 0.6em;
+    }
 }

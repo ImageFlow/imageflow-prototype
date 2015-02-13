@@ -1,16 +1,15 @@
 <div class="row" id="bottom-toolbar">
     <div class="medium-6 columns hide-for-small" id="thumbs">
         <div class="2-columns">
-            <span id="selected-items" class="small"></span> <span class="small" id="clear" ng-click="deSelect()">Clear Selection</span>
+            <div class="selected-pic-actions"><span id="selected-items" class="small"></span> <br /> <span class="small" id="clear" ng-click="deSelect()">Clear Selection</span></div>
             <img ng-repeat="image in selectedImages.images track by $index"  src="{{image}}" style="max-height:54px !important; margin: 3px;" />
         </div>
     </div>
 
     <div id="buttons" class="medium-6 columns">
-        <div class="large-4 small-4 columns text-center icon-button">
-            <i class="fa fa-file-image-o" id="view-button"></i> <label for="View Button">View</label>
+        <div class="large-4 small-4 columns text-center icon-button" id="cg-button" style="display: none;">
+            <i class="fa fa-th" id="view-button"></i> <label for="Create Gallery">Create Gallery</label>
         </div>
-
         <div class="large-4 small-4 columns text-center important-icon-button" ng-click="insertImages()">
             <i class="fa fa-arrow-circle-o-down" id="insert-button"></i> <label for="Insert Button">Insert<span id="selected-count"></span></label>
         </div>
