@@ -9,11 +9,11 @@ At this juncture of the project (01/15) we have been working towards this point 
 
 [You can find the front end of the prototype here](http://flow.teamadesign.net/).
 
-We'll be exploring the following scenarios:
+When the prototype is complete we will test the following flows:
 
-1. [User Adds New Image To Post](http://flow.teamadesign.net/scenario1/) (ARIS, ROY) DONE
+1. User Adds New Image To Post
 
-2. [User Adds Existing Image to Post ](http://flow.teamadesign.net/scenario2/)(ARIS, ROY, PABLO) (almost done)
+2. User Adds Existing Image to Post
 
 3. User Edits Existing Image and Adds It To Post <br />3a. User Edits Metadata of Existing Image and Inserts into Post
 
@@ -26,12 +26,12 @@ We'll be exploring the following scenarios:
 <h2>How Does This Work?</h2>
 The prototype is largely based on HTML/CSS/javascript, and is meant to be simple to work with. To facilitate some of the complex transitions and interactive bits we are using AngularJS to power the modal interaction.
 
-If you want to participate, choose a scenario that is not claimed (no name behind it) and add your name to the scenario in this read me. If you'd rather work on something that is already claimed, get in touch with those folks in the Slack channel.
+To help out, [grab an issue from the issue trackers](https://github.com/ImageFlow/imageflow-prototype/issues). If you need help, join the WordPress Slack channel #image-flow
 
 <h3>Basics</h3>
-Clone the Master branch down to your local machine. All work is being done in the 'singe-app' directory. This is because each scenario builds on the functionality of the others, so combining them into a single place is the most efficient move. You can either work directly in this folder and add your scenario specific templates to it, or copy the app, name it for the scenario you want to handle and code away. Once you are done, inform the rest of the team and they can work with you to integrate it into the single app code.
-
-Inside the folder you will see an index.html file, and a number of other pages. The index file is the main WordPress admin area and post editor that the prototype is launched from. You should not need to edit this file. The other pages are views that are presented in the modal. The first is the media-grid for choosing an image, open it up and you will see that it is largely straightforward HTML. You'll notice that at the top and bottom are <code>ng-include</code> tags. These are used to include a header and footer for the modal. You can see these files in the assets/js/templates folder. These are, again, straight-forward HTML files that are simply broken out to make things easier when we repeat functionality across the prototype. If you need to create a new header or footer, add them to the templates file and change the path in your view.
+1. Clone the Master branch down to your local machine. All work is being done in the 'singe-app' directory.  
+2.  Inside the folder you will see an index.html file, and a number of other pages. The index file is the main WordPress admin area and post editor that the prototype is launched from. You should not need to edit this file.
+3. The other pages are views that are presented in the modal. The first is the media-grid for choosing an image, open it up and you will see that it is largely straightforward HTML. You'll notice that at the top and bottom are <code>ng-include</code> tags. These are used to include a header and footer for the modal. You can see these files in the assets/js/templates folder. These are, again, straight-forward HTML files that are simply broken out to make things easier when we repeat functionality across the prototype. If you need to create a new header or footer, add them to the templates file and change the path in your view.
 
 <h3>Foundation</h3>
 We are using the Foundation framework for our grid and responsive styles. Please try and lean on the framework as much as possible to save time and keep things consistent. You can find useful info to start here:
