@@ -216,7 +216,7 @@ div#tinyMCE {
     height: 100%;
     width: 80%;
     height: 440px;
-    /*margin-left: 100px;*/
+    margin-left: 100px;
 }
 .fullwidth-wrap.transi{
     transition: all 2s ease 0s;
@@ -327,7 +327,7 @@ margin-right: 10px;
 @media only screen and (max-width: 40em) { 
 
     .fullwidth-wrap {
-        margin-left: -100px;
+        margin-left: 0px !important;
         width: 100%;
         top: 0px !important;
         padding: 0px;

@@ -239,7 +239,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
         mediamodalheight = parseInt( $('#media-modal').css("height") );
         aux = mediamodalheight-132; 
         
-        positioncount= 100;
+        positioncount= 0;
         $('div.fullwidth-wrap img').each(function(index, value) { 
             var obj = $(this).parents('div.fullwidth-wrap');            
             if($.inArray($(this).attr('src'),currentImage.images)>-1){
@@ -283,8 +283,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
     // Click RIGHT
     $('a.right-arrow').click(function() {
         if (( parseInt($('div.fullwidth-wrap').last().css("left")) > 100 )
-        && ((parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 100)
-        ||(parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === -900) )) { 
+        && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
             $('div.fullwidth-wrap').each(function(index, value) {
                 var obj2 = $(this); 
                 obj2.addClass("transi"); 
@@ -302,8 +301,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
     //Click LEFT
     $('a.left-arrow').click(function() {      
         if (( parseInt($('div.fullwidth-wrap').first().css("left")) < 100 )
-        && ((parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 100)
-        ||(parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === -900) )) { 
+        && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
             $('div.fullwidth-wrap').each(function(index, value) {
                 var obj2 = $(this); 
                 obj2.addClass("transi"); 
