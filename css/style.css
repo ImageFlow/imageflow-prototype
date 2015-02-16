@@ -289,11 +289,15 @@ margin-right: 10px;
 }
 /*Upload Page*/
 #upload-area, #mobile-upload{
-	padding: 5rem;
+	padding: 2rem 1rem 5rem;
 }
 #from-url{
 	border-top: solid 1px #ccc;
-	padding-top: 2rem;
+	padding: 1rem;
+}
+
+#from-url h5{
+	padding-bottom: 1rem;
 }
 
 /*Uploading Grid*/
