@@ -44,10 +44,10 @@ app.factory('shared', function(){
 app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
     
 	/** OPEN MODAL **/
-	if($scope.secondtime===1) {
-	} else {        
-	       $('#media-modal').foundation('reveal', 'open' );
-	}
+	//if($scope.secondtime===1) {
+	//} else {
+    $('#media-modal').foundation('reveal', 'open' );
+	//}
 
 	$scope.modalTitle = 'Select Media';
 	
@@ -119,7 +119,7 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	$scope.soon = function(){
 		shared.soon();
 	}
-	
+
 }]);
 app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 	
@@ -134,7 +134,7 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared
 }]);
 app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
-	$rootScope.secondtime = 1;    
+	//$rootScope.secondtime = 1;
     
 	$scope.modalTitle = 'Upload File';
 	
@@ -145,7 +145,7 @@ app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', 'shared',
 }]);
 app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
-	$rootScope.secondtime = 1;    
+	//$rootScope.secondtime = 1;
     
 	$scope.selectedImages = currentImage,
 	
@@ -231,7 +231,7 @@ app.directive('onLastRepeat', function() {
 app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
     
 	//$('#media-modal').foundation('reveal', 'open' );	
-	$rootScope.secondtime = 1;
+	//$rootScope.secondtime = 1;
     
 	$scope.modalTitle = 'Select Media';
 	$scope.selectedImages = currentImage;
