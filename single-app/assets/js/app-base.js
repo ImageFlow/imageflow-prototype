@@ -120,6 +120,21 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		shared.soon();
 	}
 
+    /**
+     * Listen to the modal close event
+     * and reset the route to make sure
+     * the "Add Media" will trigger
+     * the modal again in-case the modal
+     * is closed on bg click.
+     **/
+    $(document).on('close.fndtn.reveal', '[data-reveal]',
+        function() {
+            $scope.$apply(function() {
+                $location.path('/');
+            });
+        }
+    );
+
 }]);
 app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 	
