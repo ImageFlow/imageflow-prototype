@@ -46,7 +46,8 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	/** OPEN MODAL **/
 	//if($scope.secondtime===1) {
 	//} else {
-    $('#media-modal').foundation('reveal', 'open' );
+    if(!$('#media-modal').hasClass('open'))
+        $('#media-modal').foundation('reveal', 'open' );
 	//}
 
 	$scope.modalTitle = 'Select Media';
