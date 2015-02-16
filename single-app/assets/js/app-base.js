@@ -129,10 +129,12 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
      * is closed on bg click.
      **/
     $(document).on('close.fndtn.reveal', '[data-reveal]',
-        function() {
-            $scope.$apply(function() {
-                $location.path('/');
-            });
+        function(){
+            if($location.path() != '/') {
+                $scope.$apply(function () {
+                    $location.path('/');
+                });
+            }
         }
     );
 
