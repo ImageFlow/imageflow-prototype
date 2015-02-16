@@ -33,18 +33,26 @@ app.service('currentImage', function() {
 	this.images = [];
 })
 
-app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
+app.factory('shared', function(){
+	return {
+		soon: function(){
+			 alert('Coming Soon!');
+		}
+	};
+})
+
+app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
     
 	/** OPEN MODAL **/
+	if($scope.secondtime===1) {
+	} else {        
+	       $('#media-modal').foundation('reveal', 'open' );
+	}
 
-    if($scope.secondtime===1) {
-    } else {        
-	   $('#media-modal').foundation('reveal', 'open' );
-    }
 	$scope.modalTitle = 'Select Media';
 	
 	$scope.selectedImages = currentImage;
-    $scope.selectedImages.images = [];	
+	$scope.selectedImages.images = [];	
     
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images
@@ -101,7 +109,6 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	$scope.insertImages = function() {
 		$location.path('/');
 		$('#media-modal').foundation('reveal', 'close' );
-		
 		$('body').trigger( 'insertImages' );
 	}
 	
@@ -109,8 +116,12 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		$location.path('/');
 	}
 	
+	$scope.soon = function(){
+		shared.soon();
+	}
+	
 }]);
-app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
+app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 	
 	$('body').on('insertImages', function() {
 		$.each( currentImage.images, function( key, value ) {
@@ -121,7 +132,7 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', '$http'
 	});
 	
 }]);
-app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
+app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
 	$rootScope.secondtime = 1;    
     
@@ -132,20 +143,19 @@ app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', '$http', 
 	}
 	
 }]);
-app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
+app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
 	$rootScope.secondtime = 1;    
     
 	$scope.selectedImages = currentImage,
 	
 	$scope.modalTitle = 'Select Media';
-	
-	$scope.selectedImages = currentImage,
-		
+			
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images;
 		setTimeout(function(){
-			$('#uploading').fadeOut('slow');	
+			$('#uploading').fadeOut('slow');
+			$scope.imageSelect(0, $('div.gridwrap'));
 		}, 500 );
 	});
 	
@@ -218,99 +228,99 @@ app.directive('onLastRepeat', function() {
     };
 });
 
-app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http', '$location', function( $rootScope, $scope, currentImage, $http, $location ) {
+app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
     
 	//$('#media-modal').foundation('reveal', 'open' );	
 	$rootScope.secondtime = 1;
     
-	$scope.modalTitle = 'Full Width View';
+	$scope.modalTitle = 'Select Media';
 	$scope.selectedImages = currentImage;
 	//$scope.selectedImages.images = [];
     
-    $scope.$on('$viewContentLoaded', function() {
-        $('#grid_menu').css("display","none");  
-        $('#full_width_menu').css("display","block");      
-    });
+	$scope.$on('$viewContentLoaded', function() {
+	    $('#grid_menu').css("display","none");  
+	    $('#full_width_menu').css("display","block");      
+	});
 
-    // Start Position
-    $scope.$on('onRepeatLast', function(scope, element, attrs){
+	// Start Position
+	$scope.$on('onRepeatLast', function(scope, element, attrs){
         
-        //Size adjust
-        mediamodalheight = parseInt( $('#media-modal').css("height") );
-        aux = mediamodalheight-132; 
-        
-        positioncount= 0;
-        $('div.fullwidth-wrap img').each(function(index, value) { 
-            var obj = $(this).parents('div.fullwidth-wrap');            
-            if($.inArray($(this).attr('src'),currentImage.images)>-1){
-                obj.toggleClass('selected');
-                $(this).siblings('i.fa').css("display","block");
-                var m = currentImage.images.length;
-                if( m > 0 ) {
-                    $('#bottom-toolbar').fadeIn();
-                    $('#selected-count').text('');
-                    if (m > 1) {
-                        $('#selected-items').text(m + ' Selected');
-                        $('#selected-count').text('(' + m + ')');
-                    }
-                }                 
-            } else {
-                $(this).siblings('i.fa').css("display","block");              
-            }
-            obj.css( "position", "absolute" ); 
-            obj.css( "top", 12 );
-            obj.css( "left", positioncount );
-            positioncount=positioncount+1000;
-
-            //Size adjust
-           /* $(this).css("max-height",aux); 
-            if($(this).height() < aux ) {
-                aux2 = (aux - $(this).height() ) / 2 ;
-                $(this).css("top", aux2);   
-            }*/            
-            
-        });
-        
-        //Size adjust
-
-        $('.fw-image-wrap').css("height",aux);  
-        $('.fullwidth-wrap').css("height",aux);         
-        $('#cg-button').css("display", "inline"); 
-        $('#fw-button').css("display", "none");        
-        
-    });
-    
-    // Click RIGHT
-    $('a.right-arrow').click(function() {
-        if (( parseInt($('div.fullwidth-wrap').last().css("left")) > 100 )
-        && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
-            $('div.fullwidth-wrap').each(function(index, value) {
-                var obj2 = $(this); 
-                obj2.addClass("transi"); 
-                leftposition = $(this).css("left");
-                var leftposition = parseInt($(this).css("left")) -1000;
-                $(this).css("left", leftposition); 
-            }); 
-        }
-    });
-   
-    $("#full-width-area").on("swiperight",function(){
-      alert("Hello");
-    });
-
-    //Click LEFT
-    $('a.left-arrow').click(function() {      
-        if (( parseInt($('div.fullwidth-wrap').first().css("left")) < 100 )
-        && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
-            $('div.fullwidth-wrap').each(function(index, value) {
-                var obj2 = $(this); 
-                obj2.addClass("transi"); 
-                leftposition = $(this).css("left");
-                var leftposition = parseInt($(this).css("left")) +1000;
-                $(this).css("left", leftposition);   
-            });
-        }
-    }); 
+		//Size adjust
+		mediamodalheight = parseInt( $('#media-modal').css("height") );
+		aux = mediamodalheight-132; 
+		
+		positioncount= 0;
+		$('div.fullwidth-wrap img').each(function(index, value) { 
+		    var obj = $(this).parents('div.fullwidth-wrap');            
+		    if($.inArray($(this).attr('src'),currentImage.images)>-1){
+			obj.toggleClass('selected');
+			$(this).siblings('i.fa').css("display","block");
+			var m = currentImage.images.length;
+			if( m > 0 ) {
+			    $('#bottom-toolbar').fadeIn();
+			    $('#selected-count').text('');
+			    if (m > 1) {
+				$('#selected-items').text(m + ' Selected');
+				$('#selected-count').text('(' + m + ')');
+			    }
+			}                 
+		    } else {
+			$(this).siblings('i.fa').css("display","block");              
+		    }
+		    obj.css( "position", "absolute" ); 
+		    obj.css( "top", 12 );
+		    obj.css( "left", positioncount );
+		    positioncount=positioncount+1000;
+	
+		    //Size adjust
+		   /* $(this).css("max-height",aux); 
+		    if($(this).height() < aux ) {
+			aux2 = (aux - $(this).height() ) / 2 ;
+			$(this).css("top", aux2);   
+		    }*/            
+		    
+		});
+		
+		//Size adjust
+	
+		$('.fw-image-wrap').css("height",aux);  
+		$('.fullwidth-wrap').css("height",aux);         
+		$('#cg-button').css("display", "inline"); 
+		$('#fw-button').css("display", "none");        
+		
+	});
+	    
+	// Click RIGHT
+	$('a.right-arrow').click(function() {
+	    if (( parseInt($('div.fullwidth-wrap').last().css("left")) > 100 )
+	    && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
+		$('div.fullwidth-wrap').each(function(index, value) {
+		    var obj2 = $(this); 
+		    obj2.addClass("transi"); 
+		    leftposition = $(this).css("left");
+		    var leftposition = parseInt($(this).css("left")) -1000;
+		    $(this).css("left", leftposition); 
+		}); 
+	    }
+	});
+	   
+	$("#full-width-area").on("swiperight",function(){
+	  alert("Hello");
+	});
+	
+	//Click LEFT
+	$('a.left-arrow').click(function() {      
+	    if (( parseInt($('div.fullwidth-wrap').first().css("left")) < 100 )
+	    && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
+		$('div.fullwidth-wrap').each(function(index, value) {
+		    var obj2 = $(this); 
+		    obj2.addClass("transi"); 
+		    leftposition = $(this).css("left");
+		    var leftposition = parseInt($(this).css("left")) +1000;
+		    $(this).css("left", leftposition);   
+		});
+	    }
+	}); 
     
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images;
@@ -340,7 +350,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	$scope.deSelect = function(){
         /*$('div.fullwidth-wrap.selected i.fa').toggle();*/       
 		$('div.fullwidth-wrap.selected').removeClass('selected');
-        $scope.selectedImages.images = [];
+		$scope.selectedImages.images = [];
 		$scope.showFooter();
 	}
 	
@@ -350,7 +360,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 		if( m > 0 ) {
 			$('#bottom-toolbar').fadeIn();
 			$('#selected-count').text('');
-            $('#selected-items').text('');            
+			$('#selected-items').text('');            
 			if (m > 1) {
 				$('#selected-items').text(m + ' Selected');
 				$('#selected-count').text('(' + m + ')');
@@ -371,6 +381,10 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', '$http
 	
 	$scope.goHome = function(){
 		$location.path('/');
+	}
+	
+	$scope.soon = function(){
+		shared.soon();
 	}
 
 	/*$scope.gobackgrid = function() {
