@@ -307,9 +307,10 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		$('#fw-button').css("display", "none");        
 		
 	});
-	    
+
 	// Click RIGHT
-	$('a.right-arrow').click(function() {
+    
+    function moveright() {
 	    if (( parseInt($('div.fullwidth-wrap').last().css("left")) > 100 )
 	    && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
 		$('div.fullwidth-wrap').each(function(index, value) {
@@ -320,14 +321,19 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		    $(this).css("left", leftposition); 
 		}); 
 	    }
-	});
+	}
+    
+	$('a.right-arrow').click(function() {      
+        moveright();
+	}); 
 	   
-	$("#full-width-area").on("swiperight",function(){
-	  alert("Hello");
+	$("#full-width-area").on("swipeleft",function(){
+        moveright();
 	});
 	
 	//Click LEFT
-	$('a.left-arrow').click(function() {      
+
+    function moveleft() {      
 	    if (( parseInt($('div.fullwidth-wrap').first().css("left")) < 100 )
 	    && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
 		$('div.fullwidth-wrap').each(function(index, value) {
@@ -338,7 +344,15 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		    $(this).css("left", leftposition);   
 		});
 	    }
+	}    
+    
+    $('a.left-arrow').click(function() {
+        moveleft();        
 	}); 
+
+	$("#full-width-area").on("swiperight",function(){
+        moveleft();
+	});    
     
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images;

@@ -219,9 +219,9 @@ div#tinyMCE {
     margin-left: 100px;
 }
 .fullwidth-wrap.transi{
-    transition: all 2s ease 0s;
-    -webkit-transition: all 2s ease 0s;
-    -moz-transition: all 2s ease 0s;  
+    transition: all 1s ease 0s;
+    -webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;  
 }
 .fullwidth-wrap.selected i{
 	position: absolute;
