@@ -25,7 +25,7 @@ app.config( function( $routeProvider ) {
 	$routeProvider.when( '/fullWidth', {
 		templateUrl: '05-full-width.html',
 		controller: 'fullWidthCtrl',
-	});       
+	});
 })
 
 /** GLOBAL VAR FOR CURRENT IMAGES **/
@@ -173,7 +173,12 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		$scope.images = res.data.images;
 		setTimeout(function(){
 			$('#uploading').fadeOut('slow');
-			$scope.imageSelect(0, $('div.gridwrap'));
+            /**
+             * Trigger click after the upload proccess is done
+             * to select the newly uploaded image.
+             * Triggering click will naturally trigger $scope.imageSelect()
+             */
+            $('.grid-wrap[data-index="0"] img').trigger('click');
 		}, 500 );
 	});
 	
