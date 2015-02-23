@@ -265,7 +265,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
         
 		//Size adjust
 		mediamodalheight = parseInt( $('#media-modal').css("height") );
-		aux = mediamodalheight-132; 
+		aux = mediamodalheight-132-20; 
 		
 		positioncount= 0;
 		$('div.fullwidth-wrap img').each(function(index, value) { 
@@ -305,21 +305,26 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		$('.fullwidth-wrap').css("height",aux);         
 		$('#cg-button').css("display", "inline"); 
 		$('#fw-button').css("display", "none");        
-		
-	});
 
+        var h = $('div.fullwidth-wrap').length;    
+        $('#totalimg').text(h);         
+        
+	});
+    
 	// Click RIGHT
     
     function moveright() {
-	    if (( parseInt($('div.fullwidth-wrap').last().css("left")) > 100 )
+	    if (( parseInt($('div.fullwidth-wrap').last().css("left")) > 0 )
 	    && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
-		$('div.fullwidth-wrap').each(function(index, value) {
-		    var obj2 = $(this); 
-		    obj2.addClass("transi"); 
-		    leftposition = $(this).css("left");
-		    var leftposition = parseInt($(this).css("left")) -1000;
-		    $(this).css("left", leftposition); 
-		}); 
+            $('div.fullwidth-wrap').each(function(index, value) {
+                var obj2 = $(this); 
+                obj2.addClass("transi"); 
+                leftposition = $(this).css("left");
+                var leftposition = parseInt($(this).css("left")) -1000;
+                $(this).css("left", leftposition); 
+            });  
+            myInteger = parseInt($('#actualimg').html());
+            $('#actualimg').text((myInteger+1));         
 	    }
 	}
     
@@ -334,15 +339,17 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	//Click LEFT
 
     function moveleft() {      
-	    if (( parseInt($('div.fullwidth-wrap').first().css("left")) < 100 )
+	    if (( parseInt($('div.fullwidth-wrap').first().css("left")) < 0 )
 	    && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
-		$('div.fullwidth-wrap').each(function(index, value) {
-		    var obj2 = $(this); 
-		    obj2.addClass("transi"); 
-		    leftposition = $(this).css("left");
-		    var leftposition = parseInt($(this).css("left")) +1000;
-		    $(this).css("left", leftposition);   
-		});
+            $('div.fullwidth-wrap').each(function(index, value) {
+                var obj2 = $(this); 
+                obj2.addClass("transi"); 
+                leftposition = $(this).css("left");
+                var leftposition = parseInt($(this).css("left")) +1000;
+                $(this).css("left", leftposition);   
+            });
+            myInteger = parseInt($('#actualimg').html());
+            $('#actualimg').text((myInteger-1));              
 	    }
 	}    
     
