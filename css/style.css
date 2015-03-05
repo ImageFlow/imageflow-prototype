@@ -405,7 +405,7 @@ div#tinyMCE {
 
 /*Meta Data View, Full Width*/
 .card-container {
-	perspective: 1000;
+	perspective: 1000px;
 	width: 100%;
 }
 .card-container.transi {
