@@ -1,15 +1,91 @@
 <ng-include src="'assets/js/templates/modalNav-fw.html?v=2.1.6'"></ng-include>
 <div class="row" id="media-frame-content">
-    <div class="large-12 columns left" id="full-width-area">
-        <div class="fullwidth-wrap small-12 medium-12 large-10 columns" ng-repeat="image in images track by $index" ng-if="$index!=0" ng-click="imageSelect( $index, $event )" data-index="{{$index}}" on-last-repeat>
-            <div class="fw-image-wrap">
-            	<i class="fa fa-check-square-o"></i>
-		<img src="{{image.large}}">
+    <div class="small-12 columns" id="full-width-area">
+        <div class="card-container" ng-repeat="image in images track by $index" ng-if="$index!=0" ng-click="imageSelect( $index, $event )" data-index="{{$index}}" on-last-repeat>
+	    <div class="flipper">
+		<div class="fullwidth-wrap front">
+		    <div class="image">
+			<div class="row">
+			    <div class="small-12 small-centered medium-10 columns">
+				<div class="fw-image-wrap">
+				    <i class="fa fa-check-square-o"></i>
+				    <img src="{{image.large}}">
+				</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+		<div class="meta-wrap back">
+		    <div class="row">
+			<div class="columns small-12 text-left">
+			    <h3>Edit Metadata</h3>
+			</div>
+		    </div>
+		    <div class="meta">
+			<div class="row" id="image-info">
+			    <div class="columns small-10 small-centered medium-uncentered medium-4 text-left">
+				<img src="{{image.medium}}">
+				<ul id="file-meta" class="no-bullet">
+				    <li><strong>Image Title</strong></li>
+				    <li><span class="date">October, 10, 2015</span></li>
+				    <li><span class="dimensions"></span></li>
+				</ul>
+			    </div>
+			    <div class="row show-for-small">
+				    <div class="small-12">
+					<hr class="show-for-small" />
+				    </div>
+			    </div>
+			    <div class="columns small-10 small-centered medium-uncentered medium-4 text-left">
+				<form id="image-meta" name="image-meta" action="#">
+				    <h5 class="hide-for-small">Image Details</h5>
+				    <label for="title">Title</label>
+				    <input type="text" id="title" name="title" />
+				    <label for="caption">Caption</label>
+				    <input type="text" id="caption" name="caption" />
+				    <label for="alt">Alt Text</label>
+				    <input type="text" id="alt" name="alt" />
+				    <label for="description">Description</label>
+				    <textarea></textarea>
+				</form>
+			    </div>
+			    <div class="row show-for-small">
+				    <div class="small-12">
+					<hr class="show-for-small" />
+				    </div>
+			    </div>
+			    <div class="columns small-10 small-centered medium-uncentered medium-4 text-left">
+				<form>
+				    <h5 class="hide-for-small">Post Settings</h5>
+				    <label for="linkto">Link To:</label>
+				    <select id="linkto" name="linkto">
+					<option>Attachment Page</option>
+					<option>File</option>
+				    </select>
+				    <label for="size">Inserted Size:</label>
+				    <select id="size" name="size">
+					<option>Small</option>
+					<option>Medium</option>
+					<option>Large</option>
+					<option selected="selected">Full Size</option>
+				    </select>
+				</form>
+			    </div>
+			</div>
+		    </div>
+		</div>
 	    </div>
         </div>
-        <a class="left-arrow"><</a>        
-        <a class="right-arrow">></a>
-        <p id="slidertext"><span id="actualimg">1</span> of <span id="totalimg">1</span></p>
+        <a class="left-arrow hide-for-small"><</a>        
+        <a class="right-arrow hide-for-small">></a>
+    </div>
+    <div class="row">
+	<div id="slidertext" class="large-12 columns">
+	    	<a class="left-arrow show-for-small"><</a>        
+	    <span id="actualimg">1</span> of <span id="totalimg">1</span>
+		<a class="right-arrow show-for-small">></a>
+
+	</div>
     </div>
 </div>
 <div class="fw">

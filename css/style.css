@@ -189,7 +189,6 @@ div#tinyMCE {
     height: 500px;
     overflow: hidden;
     padding: 10px;
-    position: relative;
 }
 #full-width-area .right-arrow {
     position: absolute;
@@ -204,45 +203,42 @@ div#tinyMCE {
     font-size: 50px;   
 }
 .fullwidth-wrap{	
-	background: #eee;
+	/*background: #eee;
 	/*float: left;*/
 	text-align: center;
 	vertical-align: middle;
-	margin: 0;
-	position: absolute;
-    top: 0px;
-    left: 0px;
+	position: relative;
+	/*top: 0px;
+	left: 0px;
 	/*border: solid 1px white;*/
-    height: 100%;
-    width: 80%;
-    height: 440px;
-    margin-left: 100px;
+	/*margin-left: 100px;*/
+	-webkit-backface-visibility: inherit;
+	backface-visibility: inherit;
 }
 .fullwidth-wrap.transi{
-    transition: all 1s ease 0s;
-    -webkit-transition: all 1s ease 0s;
-    -moz-transition: all 1s ease 0s;  
+	transition: all 1s ease 0s;
+	-webkit-transition: all 1s ease 0s;
+	-moz-transition: all 1s ease 0s;  
 }
-.fullwidth-wrap.selected i{
-	position: absolute;
-	bottom: 18px;
-	left: 30px;
-	font-size: 4.25rem;
-	z-index: 100;
-	color: #2ea2cc;
-}
+
 .fullwidth-wrap i{
 	position: absolute;
-	bottom: 18px;
-	left: 30px;
+	bottom: .5em;
+	left: .5em;
 	font-size: 4.25rem;
-	z-index: 100;
 	color: #dddddd;
+	z-index: 2;
 }
 .fullwidth-wrap i:hover{
     cursor: pointer;
 }
+.fullwidth-wrap.selected i{
+	font-size: 4.25rem;
+	z-index: 2;
+	color: #2ea2cc;
+}
 .fw-image-wrap{
+	background: #eee;
 	width: 100%;
 	height: 100%;
 }
@@ -258,44 +254,62 @@ div#tinyMCE {
 	display: none;
 }
 .fw-selected i{
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	font-size: 1.25rem;
-	z-index: 100;
-	color: #2ea2cc;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		font-size: 1.25rem;
+		color: #2ea2cc;
 }
 
 .fw #bottom-toolbar {
-    display: block;
+	display: block;
 }
 
 #slidertext {
-    color: #2ba6cb;
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 5px;
-    font-weight: bold;
+	color: #2ba6cb;
+	text-align: center;
+	font-weight: bold;
 }
 
 .selected-pic-actions {
-position: relative;
-float: left;
-padding-top: 6px;
-margin-right: 10px;
+	position: relative;
+	float: left;
+	padding-top: 6px;
+	margin-right: 10px;
 }
 .selected-pic-actions span {
-    font-size: 0.8em;
+	font-size: 0.8em;
 }
 .selected-pic-actions #clear {
-    position: relative;
-    top: -4px;
-    color: #2ea2cc;
+	position: relative;
+	top: -4px;
+	color: #2ea2cc;
 }
 .selected-pic-actions #clear:hover {   
-    cursor: pointer;
+	cursor: pointer;
 }
+
+/* Meta Data */
+.meta-wrap{	
+	background: #F0F0F0;
+	border: solid 1px #ccc;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/*border: solid 1px white;*/
+	margin-left: 100px;
+	height: 100%;
+	width: 90%
+	-webkit-backface-visibility: inherit;
+	backface-visibility: inherit;
+}
+
+.meta-wrap.transi{
+    transition: all 1s ease 0s;
+    -webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;  
+}
+
 /*Upload Page*/
 #upload-area, #mobile-upload{
 	padding: 2rem 1rem 5rem;
@@ -340,6 +354,7 @@ margin-right: 10px;
 @media only screen and (max-width: 40em) { 
 
     .fullwidth-wrap {
+	backface-visibility: hidden;
         margin-left: 0px !important;
         width: 100%;
         top: 0px !important;
@@ -347,8 +362,6 @@ margin-right: 10px;
     }
     .fullwidth-wrap i {
         position: absolute;
-        bottom: 40px;
-        left: 40px;
         font-size: 3.5rem;
     }
     .fullwidth-wrap.selected i{
@@ -375,4 +388,55 @@ margin-right: 10px;
     #cg-button {
         font-size: 0.6em;
     }
+    .meta-wrap {
+	backface-visibility: hidden;
+        margin-left: 0px !important;
+        width: 100%;
+        top: 0px !important;
+        padding: 0px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+    }
+    .meta-wrap img{
+	max-width: 30%;
+	float: left;
+    }
+}
+
+/*Meta Data View, Full Width*/
+.card-container {
+	perspective: 1000;
+	width: 100%;
+}
+.card-container.transi {
+	transition: all 1s ease 0s;
+	-webkit-transition: all 1s ease 0s;
+	-moz-transition: all 1s ease 0s;  
+}
+
+.flipper {
+	transform: translate3d(0,0,0);
+	transform-style: preserve-3d;
+}
+
+.card-container, .front, .back {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	/*top: 0;
+	left: 0;
+	text-align: center;*/
+	z-index: inherit;
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+
+#meta-data-view .toggled{
+	color: red;
 }

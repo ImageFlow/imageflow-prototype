@@ -33,12 +33,21 @@ app.service('currentImage', function() {
 	this.images = [];
 })
 
-app.factory('shared', function(){
-	return {
-		soon: function(){
-			 alert('Coming Soon!');
-		}
-	};
+app.service('shared', function(){
+	this.soon = function(){
+		 alert('Coming Soon!');
+	}
+	
+	this.insertImages = function() {
+		$location.path('/');
+		$('#media-modal').foundation('reveal', 'close' );
+		$('body').trigger( 'insertImages' );
+	}
+	
+	this.selected = [];
+	this.selectImage = function(image){
+		selected.push(image);
+	}
 })
 
 app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
@@ -104,13 +113,10 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 			$('#bottom-toolbar').fadeOut();
 			$('#selected-items').text('');
 		}
-		
 	}
 	
 	$scope.insertImages = function() {
-		$location.path('/');
-		$('#media-modal').foundation('reveal', 'close' );
-		$('body').trigger( 'insertImages' );
+		shared.insertImages();
 	}
 	
 	$scope.goHome = function(){
@@ -229,7 +235,7 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	$scope.insertImages = function() {
 		$scope.selectedImages.images = [];		
 		$.each( $('div.grid-wrap.selected'), function( value, key ) {
-			$scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
+		$scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
 		});
 		$location.path('/');
 		$('#media-modal').foundation('reveal', 'close' );
@@ -270,11 +276,13 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
         
 		//Size adjust
 		mediamodalheight = parseInt( $('#media-modal').css("height") );
-		aux = mediamodalheight-132-20; 
+		aux = mediamodalheight-132-40; 
 		
 		positioncount= 0;
+		
 		$('div.fullwidth-wrap img').each(function(index, value) { 
-		    var obj = $(this).parents('div.fullwidth-wrap');            
+		    var obj = $(this).parents('div.card-container');            
+		    
 		    if($.inArray($(this).attr('src'),currentImage.images)>-1){
 			obj.toggleClass('selected');
 			$(this).siblings('i.fa').css("display","block");
@@ -293,8 +301,10 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		    obj.css( "position", "absolute" ); 
 		    obj.css( "top", 12 );
 		    obj.css( "left", positioncount );
-		    positioncount=positioncount+1000;
+
+		    positioncount = positioncount+1000;
 	
+			
 		    //Size adjust
 		   /* $(this).css("max-height",aux); 
 		    if($(this).height() < aux ) {
@@ -306,10 +316,12 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		
 		//Size adjust
 	
-		$('.fw-image-wrap').css("height",aux);  
-		$('.fullwidth-wrap').css("height",aux);         
-		$('#cg-button').css("display", "inline"); 
-		$('#fw-button').css("display", "none");        
+		$('.fw-image-wrap').css("height",aux);
+		$('.fullwidth-wrap').css("height",aux);
+		$('div.metawrap div.meta').css("height",aux);
+		$('.meta-wrap').css("height",aux);
+		$('#cg-button').css("display", "inline");
+		$('#fw-button').css("display", "none");       
 
         var h = $('div.fullwidth-wrap').length;    
         $('#totalimg').text(h);         
@@ -318,35 +330,34 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     
 	// Click RIGHT
     
-    function moveright() {
-	    if (( parseInt($('div.fullwidth-wrap').last().css("left")) > 0 )
-	    && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
-            $('div.fullwidth-wrap').each(function(index, value) {
-                var obj2 = $(this); 
-                obj2.addClass("transi"); 
-                leftposition = $(this).css("left");
-                var leftposition = parseInt($(this).css("left")) -1000;
-                $(this).css("left", leftposition); 
-            });  
-            myInteger = parseInt($('#actualimg').html());
-            $('#actualimg').text((myInteger+1));         
+	function moveright() {
+	    if (( parseInt( $('div.card-container').last().css("left") ) > 0 ) && ( parseInt($('div.card-container').first().css("left"))%1000 === 0) ) { 
+		$('div.card-container').each(function(index, value) {
+		    var obj2 = $(this);
+		    obj2.addClass("transi");
+		    leftposition = $(this).css("left");
+		    var leftposition = parseInt($(this).css("left")) -1000;
+		    $(this).css("left", leftposition);
+		});
+		myInteger = parseInt($('#actualimg').html());
+		$('#actualimg').text((myInteger+1));         
 	    }
 	}
     
 	$('a.right-arrow').click(function() {      
-        moveright();
+		moveright();
 	}); 
 	   
 	$("#full-width-area").on("swipeleft",function(){
-        moveright();
+		moveright();
 	});
 	
 	//Click LEFT
 
-    function moveleft() {      
-	    if (( parseInt($('div.fullwidth-wrap').first().css("left")) < 0 )
-	    && (parseInt($('div.fullwidth-wrap').first().css("left"))%1000 === 0)) { 
-            $('div.fullwidth-wrap').each(function(index, value) {
+	function moveleft() {      
+	    if (( parseInt($('div.card-container').first().css("left")) < 0 )
+	    && (parseInt($('div.card-container').first().css("left"))%1000 === 0)) { 
+            $('div.card-container').each(function(index, value) {
                 var obj2 = $(this); 
                 obj2.addClass("transi"); 
                 leftposition = $(this).css("left");
@@ -358,24 +369,24 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	    }
 	}    
     
-    $('a.left-arrow').click(function() {
-        moveleft();        
+	$('a.left-arrow').click(function() {
+		moveleft();        
 	}); 
 
 	$("#full-width-area").on("swiperight",function(){
-        moveleft();
+		moveleft();
 	});    
     
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images;
 	});
-    
+	
 	$scope.imageSelect = function(key, e) {
-		if( e.target.localName == 'img' ||  e.target.localName == 'i' || $(e.target).hasClass('image-wrap') ){
+		if( e.target.localName == 'img' || e.target.localName == 'i' || $(e.target).hasClass('image-wrap') ){
 			var obj = $(e.target).parents('div.fullwidth-wrap');
 			obj.toggleClass('selected');
 			//$(e.target).siblings('i.fa').toggle();
-			var img = $scope.images[obj.data('index')].large;		
+			var img = $scope.images[obj.data('index')].large;
 		} else {
 			var obj = $(e.target);
 			obj.toggleClass('selected');
@@ -419,7 +430,6 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	$scope.insertImages = function() {
 		$location.path('/');
 		$('#media-modal').foundation('reveal', 'close' );
-		
 		$('body').trigger( 'insertImages' );
 	}
 	
@@ -431,6 +441,17 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		shared.soon();
 	}
 
+	$scope.flip = function(e){
+		var obj = $(e.target).parents('div#meta-data-view');
+		if (obj.hasClass('toggled')) {
+			$(".flipper").velocity('reverse');
+			obj.removeClass('toggled');
+		} else {
+			obj.addClass('toggled');
+			$(".flipper").velocity({ rotateY: "180deg"}, 1000);
+		}	
+	}
+	
 	/*$scope.gobackgrid = function() {
         $scope.saveselectedimages = 1 ;
         window.location.href = "http://imageflow.pabloperea.com/single-app/#/mediaGrid";
