@@ -290,18 +290,19 @@ div#tinyMCE {
 }
 
 /* Meta Data */
-.meta-wrap{	
-	background: #F0F0F0;
-	border: solid 1px #ccc;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	/*border: solid 1px white;*/
-	margin-left: 100px;
-	height: 100%;
-	width: 90%
-	-webkit-backface-visibility: inherit;
-	backface-visibility: inherit;
+.meta-wrap{
+    background: #F0F0F0;
+    border: solid 1px #ccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* border: solid 1px white; */
+    /* margin-left: 100px; */
+    /* height: 100%; */
+    /* width: 90%; */
+    -webkit-backface-visibility: inherit;
+    backface-visibility: inherit;
 }
 
 .meta-wrap.transi{
