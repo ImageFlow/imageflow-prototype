@@ -193,14 +193,26 @@ div#tinyMCE {
 #full-width-area .right-arrow {
     position: absolute;
     bottom: 200px;
-    right: 50px;
-    font-size: 50px;   
+    right: 30px;
+    font-size: 50px;
+    /* Let's add some style to our arrow */
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #2EA2CC;
 }
 #full-width-area .left-arrow {
     position: absolute;
     bottom: 200px;
-    left: 50px;
-    font-size: 50px;   
+    left: 30px;
+    font-size: 50px;
+    /* Let's add some style to our arrow */
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid #2EA2CC;
 }
 .fullwidth-wrap{	
 	/*background: #eee;
