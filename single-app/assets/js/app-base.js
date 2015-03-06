@@ -281,10 +281,10 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 		positioncount= 0;
 		
 		$('div.fullwidth-wrap img').each(function(index, value) { 
-		    var obj = $(this).parents('div.card-container');            
-		    
+		    var obj = $(this).parents('div.card-container');
+		    var selector = $(this).parents('div.fullwidth-wrap');
 		    if($.inArray($(this).attr('src'),currentImage.images)>-1){
-			obj.toggleClass('selected');
+			selector.toggleClass('selected');
 			$(this).siblings('i.fa').css("display","block");
 			var m = currentImage.images.length;
 			if( m > 0 ) {

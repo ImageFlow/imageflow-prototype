@@ -69,6 +69,7 @@ div#tinyMCE {
 #media-modal .close-reveal-modal{
 	top: 0;
 }
+
 #top-toolbar{
 	background-color: rgba(252, 252, 252, 1);
 	border-bottom: solid 1px #ccc;
@@ -143,7 +144,7 @@ div#tinyMCE {
 	left: 0;
 }
 .image-wrap:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 .image-wrap img {
 	position: relative;
@@ -266,11 +267,11 @@ div#tinyMCE {
 	display: none;
 }
 .fw-selected i{
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		font-size: 1.25rem;
-		color: #2ea2cc;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 1.25rem;
+	color: #2ea2cc;
 }
 
 .fw #bottom-toolbar {
