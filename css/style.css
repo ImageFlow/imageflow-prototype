@@ -193,14 +193,26 @@ div#tinyMCE {
 #full-width-area .right-arrow {
     position: absolute;
     bottom: 200px;
-    right: 50px;
-    font-size: 50px;   
+    right: 30px;
+    font-size: 50px;
+    /* Let's add some style to our arrow */
+    width: 0;
+    height: 0;
+    border-left: 20px solid #2EA2CC;
+    border-top: 20px inset rgba(255, 255, 255, 0);
+    border-bottom: 20px inset rgba(255, 255, 255, 0);
 }
 #full-width-area .left-arrow {
     position: absolute;
     bottom: 200px;
-    left: 50px;
-    font-size: 50px;   
+    left: 30px;
+    font-size: 50px;
+    /* Let's add some style to our arrow */
+    width: 0;
+    height: 0;
+    border-right: 20px solid #2EA2CC;
+    border-top: 20px inset rgba(255, 255, 255, 0);
+    border-bottom: 20px inset rgba(255, 255, 255, 0);
 }
 .fullwidth-wrap{	
 	/*background: #eee;
@@ -290,18 +302,19 @@ div#tinyMCE {
 }
 
 /* Meta Data */
-.meta-wrap{	
-	background: #F0F0F0;
-	border: solid 1px #ccc;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	/*border: solid 1px white;*/
-	margin-left: 100px;
-	height: 100%;
-	width: 90%
-	-webkit-backface-visibility: inherit;
-	backface-visibility: inherit;
+.meta-wrap{
+    background: #F0F0F0;
+    border: solid 1px #ccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* border: solid 1px white; */
+    /* margin-left: 100px; */
+    /* height: 100%; */
+    /* width: 90%; */
+    -webkit-backface-visibility: inherit;
+    backface-visibility: inherit;
 }
 
 .meta-wrap.transi{
@@ -405,7 +418,7 @@ div#tinyMCE {
 
 /*Meta Data View, Full Width*/
 .card-container {
-	perspective: 1000;
+	perspective: 1000px;
 	width: 100%;
 }
 .card-container.transi {
