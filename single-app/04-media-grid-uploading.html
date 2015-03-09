@@ -6,18 +6,18 @@
                 <a href="#/source"><i class="fa fa-plus-circle"></i><label for="add-new">Add New</label></a>
             </div>
         </div>
-	
-        <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}">
+
+        <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}" image-watcher="image.large">
             <div class="image-wrap">
-				<span class="fa fa-circle-o-notch fa-spin" id="uploading" ng-if="$index == 0"></span>
-            	<i class="fa fa-check-square-o"></i>
-				<img src="{{image.medium}}">
-	    	</div>
+                <span class="fa fa-circle-o-notch fa-spin" id="uploading" ng-if="$index == 0"></span>
+                <i class="fa fa-check-square-o"></i>
+                <img src="{{image.large}}">
+            </div>
         </div>
     </div>
 </div>
 <ng-include src="'assets/js/templates/modalFooter.html'"></ng-include>
 
 <script type="text/javascript">
-	$(document).foundation();
+    $(document).foundation();
 </script>
