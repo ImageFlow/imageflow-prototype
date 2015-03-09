@@ -469,27 +469,39 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	$http.get('assets/js/data.json').then(function(res){
 		$scope.images = res.data.images;
 	});
-	
-	$scope.imageSelect = function(key, e) {
-		if( e.target.localName == 'img' || e.target.localName == 'i' || $(e.target).hasClass('image-wrap') ){
-			var obj = $(e.target).parents('div.fullwidth-wrap');
-			obj.toggleClass('selected');
-			//$(e.target).siblings('i.fa').toggle();
-			var img = $scope.images[obj.data('index')].large;
-		} else {
-			var obj = $(e.target);
-			obj.toggleClass('selected');
-			var img = $scope.images[obj.data('index')].large;
-		}
-		
-		if( !obj.hasClass('selected') ){
-			var index = $scope.selectedImages.images.indexOf( img );
-			$scope.selectedImages.images.splice( index, 1 );
-		} else {
-			$scope.selectedImages.images.push( img );
-		}
-		$scope.showFooter();
-	}
+
+
+    $scope.imageSelect = function(index, event) {
+        /**
+         * Let's handel the image select process
+         * in a way that we can rely on
+         * note: event is not necessary here
+         **/
+        var imageSrc = $scope.images[index].large;
+        /*
+         * Step 1:
+         * Check the existence of this image in our array
+         * imageExists will return the index in our array if it finds it
+         */
+        var imageExists = $scope.selectedImages.images.indexOf(imageSrc);
+        // image already exists
+        if(imageExists != -1){
+            // Remove it from the array
+            $scope.selectedImages.images.splice( imageExists, 1 );
+            // It doesn't exists
+        } else {
+            // Add it to the array
+            $scope.selectedImages.images.push( imageSrc );
+        }
+        /*
+         * Step 2:
+         * Now we can simply toggle the selected class
+         * as we are already handling the add or remove from the array
+         */
+        $('[data-index="'+index+'"]').find('.fullwidth-wrap').toggleClass('selected');
+
+        $scope.showFooter();
+    }
 	
 	$scope.deSelect = function(){
         /*$('div.fullwidth-wrap.selected i.fa').toggle();*/       
