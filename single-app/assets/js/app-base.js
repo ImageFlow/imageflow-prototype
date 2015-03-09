@@ -86,81 +86,108 @@ app.directive('imageWatcher',['currentImage',
 
 
 app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
-    
-	/** OPEN MODAL **/
-	//if($scope.secondtime===1) {
-	//} else {
+
+    /** OPEN MODAL **/
+    //if($scope.secondtime===1) {
+    //} else {
     if(!$('#media-modal').hasClass('open'))
         $('#media-modal').foundation('reveal', 'open' );
-	//}
+    //}
 
-	$scope.modalTitle = 'Select Media';
-	
-	$scope.selectedImages = currentImage;
-	$scope.selectedImages.images = [];	
-    
-	$http.get('assets/js/data.json').then(function(res){
-		$scope.images = res.data.images
-	});
-    
-	$scope.imageSelect = function(key, e) {
-		if( e.target.localName == 'img' || $(e.target).hasClass('image-wrap') ){
-			var obj = $(e.target).parents('div.grid-wrap');
-			obj.toggleClass('selected');
-			$(e.target).siblings('i.fa').toggle();
-			var img = $scope.images[obj.data('index')].large;
-			
-		} else {
-			var obj = $(e.target);
-			obj.toggleClass('selected');
-			var img = $scope.images[obj.data('index')].large;
-		}
-		
-		if( !obj.hasClass('selected') ){
-			var index = $scope.selectedImages.images.indexOf( img );
-			$scope.selectedImages.images.splice( index, 1 );
-		} else {
-			$scope.selectedImages.images.push( img );
-		}
-		$scope.showFooter();
-	}
-	
-	$scope.deSelect = function(){
-		$('div.grid-wrap.selected').each(function(){
-			$(this).removeClass('selected');
-			$(this).find('i.fa').hide();
-		})
-		$scope.showFooter();
-		$scope.selectedImages.images = [];
-	}
-	
-	$scope.showFooter = function() {
-		var m = $('div.grid-wrap.selected').length;
-		
-		if( m > 0 ) {
-			$('#bottom-toolbar').fadeIn();
-			$('#selected-count').text('');
-			if (m > 1) {
-				$('#selected-items').text(m + ' Selected');
-				$('#selected-count').text('(' + m + ')');
-			}
-		} else {
-			$('#bottom-toolbar').fadeOut();
-			$('#selected-items').text('');
-		}
-	}
-	
-	$scope.insertImages = function() {
-		shared.insertImages();
-	}
-	
-	$scope.goHome = function(){
-		$location.path('/');
-	}
-	
-	$scope.soon = function(){
-		shared.soon();
-	}
+    $scope.modalTitle = 'Select Media';
+
+    $scope.selectedImages = currentImage;
+    /* Don't empty the array */
+    // $scope.selectedImages.images = [];
+
+    $http.get('assets/js/data.json').then(function(res){
+        $scope.images = res.data.images
+    });
+
+    $scope.imageSelect = function(index, event) {
+        /**
+         * Let's handel the image select process
+         * in a way that we can rely on
+         * note: event is not necessary here
+         **/
+        var imageSrc = $scope.images[index].large;
+        /*
+         * Step 1:
+         * Check the existence of this image in our array
+         * imageExists will return the index in our array if it finds it
+         */
+        var imageExists = $scope.selectedImages.images.indexOf(imageSrc);
+        // image already exists
+        if(imageExists != -1){
+            // Remove it from the array
+            $scope.selectedImages.images.splice( imageExists, 1 );
+            // It doesn't exists
+        } else {
+            // Add it to the array
+            $scope.selectedImages.images.push( imageSrc );
+        }
+        /*
+         * Step 2:
+         * Now we can simply toggle the selected class and the icon
+         * as we are already handling the add or remove from the array
+         */
+        $('[data-index="'+index+'"]').find('.fa').toggle();
+        $('[data-index="'+index+'"]').toggleClass('selected');
+
+        $scope.showFooter();
+    }
+
+    $scope.deSelect = function(){
+        $('div.grid-wrap.selected').each(function(){
+            $(this).removeClass('selected');
+            $(this).find('i.fa').hide();
+        })
+        /* Empty the array before calling showfooter() */
+        $scope.selectedImages.images = [];
+        $scope.showFooter();
+    }
+
+    $scope.showFooter = function() {
+        /*
+         * Watch the array and not the classes
+         * for more reliable results
+         **/
+        var imagesCount = $scope.selectedImages.images.length;
+
+        if( imagesCount > 0 ) {
+            $('#bottom-toolbar').fadeIn();
+            $('#selected-count').text('');
+            if (imagesCount > 1) {
+                $('#selected-items').text(imagesCount + ' Selected');
+                $('#selected-count').text('(' + imagesCount + ')');
+            }
+        } else {
+            $('#bottom-toolbar').fadeOut();
+            $('#selected-items').text('');
+        }
+    }
+
+    $scope.insertImages = function() {
+        $.each( $('div.grid-wrap.selected'), function( value, key ) {
+            $scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
+        });
+        $location.path('/');
+        $('#media-modal').foundation('reveal', 'close' );
+
+        $('body').trigger( 'insertImages' );
+        /* Here we should empty the array */
+        $scope.selectedImages.images = [];
+    }
+
+    $scope.goHome = function(){
+        $location.path('/');
+        /* Here we should empty the array */
+        $scope.selectedImages.images = [];
+    }
+
+    $scope.soon = function(){
+        shared.soon();
+    }
 
     /**
      * Listen to the modal close event
@@ -180,6 +207,8 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     );
 
 }]);
+
+
 app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 	
 	$('body').on('insertImages', function() {
