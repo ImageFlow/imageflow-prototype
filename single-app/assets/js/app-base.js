@@ -228,6 +228,8 @@ app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', 'shared',
 	
 	$scope.goHome = function(){
 		$location.path('/');
+        /* Here we should empty the array */
+        $scope.selectedImages.images = [];
 	}
 	
 }]);
@@ -309,6 +311,8 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	
 	$scope.goHome = function(){
 		$location.path('/');
+        /* Here we should empty the array */
+        $scope.selectedImages.images = [];
 	}
 	
 }]);
@@ -499,6 +503,8 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 	
 	$scope.goHome = function(){
 		$location.path('/');
+        /* Here we should empty the array */
+        $scope.selectedImages.images = [];
 	}
 	
 	$scope.soon = function(){
