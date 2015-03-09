@@ -50,6 +50,41 @@ app.service('shared', function(){
 	}
 })
 
+/**
+ * Directive to watch the images
+ * already selected on the grid
+ * and keep it consistent with other views
+ */
+app.directive('imageWatcher',['currentImage',
+    function(currentImage) {
+        return {
+            link: function (scope, element, attrs) {
+                /* Check the array first */
+                if(currentImage.images.length > 0) {
+                    /* Watch the img src when it gets resolved */
+                    scope.$watch(attrs.imageWatcher, function(thisimageSrc){
+                        /*
+                         * Now we have the src of the images so lets check
+                         * if it was already selected
+                         **/
+                        if(currentImage.images.indexOf(thisimageSrc) != -1) {
+                            /* Image was already selected so let's make it appear as one */
+                            element.addClass('selected').find('i').toggle();
+                        }
+                        /*
+                         * Call showFooter() but only once
+                         */
+                        if(scope.$parent.$last)
+                            scope.showFooter();
+
+                    });
+                }
+            }
+        }
+    }
+]);
+
+
 app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
     
 	/** OPEN MODAL **/
