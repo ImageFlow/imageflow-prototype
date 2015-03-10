@@ -167,12 +167,8 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     }
 
     $scope.insertImages = function() {
-        $.each( $('div.grid-wrap.selected'), function( value, key ) {
-            $scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
-        });
         $location.path('/');
         $('#media-modal').foundation('reveal', 'close' );
-
         $('body').trigger( 'insertImages' );
         /* Here we should empty the array */
         $scope.selectedImages.images = [];
@@ -315,13 +311,8 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     }
 
     $scope.insertImages = function() {
-
-        $.each( $('div.grid-wrap.selected'), function( value, key ) {
-            $scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
-        });
         $location.path('/');
         $('#media-modal').foundation('reveal', 'close' );
-
         $('body').trigger( 'insertImages' );
         /* Here we should empty the array */
         $scope.selectedImages.images = [];
