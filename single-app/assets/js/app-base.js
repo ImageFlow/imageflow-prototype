@@ -167,12 +167,8 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     }
 
     $scope.insertImages = function() {
-        $.each( $('div.grid-wrap.selected'), function( value, key ) {
-            $scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
-        });
         $location.path('/');
         $('#media-modal').foundation('reveal', 'close' );
-
         $('body').trigger( 'insertImages' );
         /* Here we should empty the array */
         $scope.selectedImages.images = [];
@@ -315,13 +311,8 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     }
 
     $scope.insertImages = function() {
-
-        $.each( $('div.grid-wrap.selected'), function( value, key ) {
-            $scope.selectedImages.images.push( $scope.images[$(this).data('index')].large );
-        });
         $location.path('/');
         $('#media-modal').foundation('reveal', 'close' );
-
         $('body').trigger( 'insertImages' );
         /* Here we should empty the array */
         $scope.selectedImages.images = [];
@@ -508,15 +499,18 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     }
 
     $scope.showFooter = function() {
-        var m = $('div.fullwidth-wrap.selected').length;
+        /*
+         * Watch the array and not the classes
+         * for more reliable results
+         **/
+        var imagesCount = $scope.selectedImages.images.length;
 
-        if( m > 0 ) {
+        if( imagesCount > 0 ) {
             $('#bottom-toolbar').fadeIn();
             $('#selected-count').text('');
-            $('#selected-items').text('');
-            if (m > 1) {
-                $('#selected-items').text(m + ' Selected');
-                $('#selected-count').text('(' + m + ')');
+            if (imagesCount > 1) {
+                $('#selected-items').text(imagesCount + ' Selected');
+                $('#selected-count').text('(' + imagesCount + ')');
             }
         } else {
             $('#bottom-toolbar').fadeOut();
