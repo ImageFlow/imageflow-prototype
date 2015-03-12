@@ -1,24 +1,27 @@
-<div class="row" id="bottom-toolbar">
-    <div class="medium-6 columns hide-for-small" id="thumbs">
-        <div class="2-columns">
-            <div class="selected-pic-actions"><span id="selected-items" class="small"></span> <br /> <span class="small" id="clear" ng-click="deSelect()">Clear Selection</span></div>
+<div class="row collapse" id="bottom-toolbar">
+    <div class="selected-pic-actions medium-2 columns hide-for-small" id="selected-actions">
+        <span id="selected-items" ng-show="selectedImages.images.length > 1" class="small"></span> <br />
+        <span class="small" id="clear" ng-click="deSelect()">Clear Selection</span>
+    </div>
+    <div class="medium-4 columns hide-for-small">
+        <div id="thumb-wrap">
             <img ng-repeat="image in selectedImages.images track by $index"  src="{{image}}" style="max-height:54px !important; margin: 3px;" />
         </div>
     </div>
-
+    
     <div id="buttons" class="medium-6 columns">
-        <div class="large-4 small-4 columns text-center icon-button" id="fw-button">
-            <a href="#/fullWidth"><i class="fa fa-file-image-o" id="view-button"></i> <label for="View Button">View</label></a>
+        <div class="text-center icon-button" id="cg-button" ng-class="{'grow': selectedImages.images.length > 1}" ng-click="soon()">
+            <i class="fa fa-th" id="gallery-button" ng-show="selectedImages.images.length > 1"></i> <label for="Create Gallery" ng-show="selectedImages.images.length > 1">Create Gallery</label>
         </div>
-        <div class="large-4 small-4 columns text-center icon-button" id="cg-button" style="display: none;">
-            <i class="fa fa-th" id="view-button"></i> <label for="Create Gallery">Create Gallery</label>
+        <div class="text-center icon-button" id="fw-button" ng-class="{'shrink': selectedImages.images.length > 1}">
+            <a href="#/fullWidth"><i class="fa fa-file-image-o" id="view-button"></i> <label for="view-button">View</label></a>
         </div>
-        <div class="large-4 small-4 columns text-center important-icon-button" ng-click="insertImages()">
+        <div class="text-center important-icon-button" id="in-button" ng-class="{'shrink': selectedImages.images.length > 1}" ng-click="insertImages()">
             <i class="fa fa-arrow-circle-o-down" id="insert-button"></i> <label for="Insert Button">Insert<span id="selected-count"></span></label>
         </div>
 
-        <div class="large-4 small-4 columns text-center icon-button" ng-click="soon();">
-            <i class="fa fa-ellipsis-h" id="more-button"></i> <label for="More Button">More</label>
+        <div class="text-center icon-button" id="m-button" ng-class="{'shrink': selectedImages.images.length > 1}" ng-click="soon();">
+            <i class="fa fa-ellipsis-h" id="more-button"></i> <label for="more-button">More</label>
         </div>
     </div>
 </div>

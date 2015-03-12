@@ -122,6 +122,75 @@ div#tinyMCE {
 	background: #2ea2cc;
 }
 
+#buttons div{
+	float: left;
+}
+
+#fw-button, #in-button, #m-button{
+	-webkit-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	width: 33%;
+}
+
+#fw-button.shrink, #in-button.shrink, #m-button.shrink{
+	width: 25%;
+}
+
+#cg-button{
+	-webkit-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	width: 0%;
+	height: 60px;
+}
+
+#cg-button.grow{
+	width: 25%;
+}
+
+
+.fw-footer #in-button, .fw-footer #m-button{
+	-webkit-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	width: 50%;
+}
+
+.fw-footer #in-button.shrink, .fw-footer #m-button.shrink{
+	width: 33%;
+}
+
+.fw-footer #cg-button{
+	-webkit-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	width: 0%;
+	height: 60px;
+}
+
+.fw-footer #cg-button.grow{
+	width: 33%;
+}
+
+#insert-button{
+	color: #fff;
+}
+
+#insert-button:hover {
+    cursor: pointer;
+}
+
+#selected-actions{
+	padding-left: 1em;
+}
+
+#thumb-wrap{
+	height: 63px;
+	overflow: auto;
+	white-space:nowrap;
+}
+
+#thumb-wrap img{
+	display:inline;
+}
+
 
 /*Media Grid*/
 
@@ -159,7 +228,7 @@ div#tinyMCE {
 .image-wrap i{
 	display: none;
 }
-.selected i{
+.grid-wrap.selected i{
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -178,10 +247,6 @@ div#tinyMCE {
 }
 #add-new i{
 	display: inline-block;
-}
-
-#insert-button:hover {
-    cursor: pointer;
 }
 
 /*Full Width*/
@@ -240,20 +305,26 @@ div#tinyMCE {
 	left: .5em;
 	font-size: 4.25rem;
 	color: #dddddd;
-	z-index: 2;
+	z-index: 1;
 }
 .fullwidth-wrap i:hover{
     cursor: pointer;
 }
 .fullwidth-wrap.selected i{
 	font-size: 4.25rem;
-	z-index: 2;
 	color: #2ea2cc;
 }
 .fw-image-wrap{
 	background: #eee;
 	width: 100%;
 	height: 100%;
+	white-space: nowrap;
+}
+.fw-image-wrap:before{
+	content: "";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
 }
 .fw-image-wrap img {
 	position: relative;
@@ -282,13 +353,14 @@ div#tinyMCE {
 	color: #2ba6cb;
 	text-align: center;
 	font-weight: bold;
+	bottom: 1.5em;
 }
 
 .selected-pic-actions {
 	position: relative;
 	float: left;
 	padding-top: 6px;
-	margin-right: 10px;
+	padding-left: 1em;
 }
 .selected-pic-actions span {
 	font-size: 0.8em;
@@ -397,10 +469,22 @@ div#tinyMCE {
         font-size: 30px;        
     }  
     #slidertext {
-        bottom: 50px;
+        bottom: 1.5em;
     }
-    #cg-button {
-        font-size: 0.6em;
+    #slidertext a.left-arrow{
+	float: left;
+	padding-left: 1em;
+    }
+    #slidertext a.right-arrow{
+	float: right;
+	padding-right: 1em;
+    }
+    #cg-button{
+	font-size: 0.6em;
+    }
+    #cg-button label {
+        font-size: .85rem;
+	line-height: 0.8;
     }
     .meta-wrap {
 	backface-visibility: hidden;
@@ -451,6 +535,6 @@ div#tinyMCE {
 	transform: rotateY(180deg);
 }
 
-#meta-data-view .toggled{
-	color: red;
+#meta-data-view.toggled i, #meta-data-view.toggled label{
+	color: #2ea2cc;
 }
