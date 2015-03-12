@@ -152,11 +152,12 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
          * for more reliable results
          **/
         var imagesCount = $scope.selectedImages.images.length;
-
+	
+	
         if( imagesCount > 0 ) {
             $('#bottom-toolbar').fadeIn();
             $('#selected-count').text('');
-            if (imagesCount > 1) {
+	    if (imagesCount > 1) {
                 $('#selected-items').text(imagesCount + ' Selected');
                 $('#selected-count').text('(' + imagesCount + ')');
             }
@@ -538,7 +539,10 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     }
 
     $scope.flip = function(e){
-        var obj = $(e.target).parents('div#meta-data-view');
+        if($(e.target).is('div#meta-data-view')){
+		console.log('i am');
+	}
+	var obj = $(e.target).is('div#meta-data-view') ? $(e.target) : $(e.target).parents('div#meta-data-view');
         if (obj.hasClass('toggled')) {
             $(".flipper").velocity('reverse');
             obj.removeClass('toggled');
