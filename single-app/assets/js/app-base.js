@@ -45,6 +45,8 @@ app.config( function( $routeProvider ) {
         templateUrl: '05-full-width.html',
         controller: 'fullWidthCtrl',
     });
+    /* Default to root */
+    $routeProvider.otherwise('/');
 })
 
 /** GLOBAL VAR FOR CURRENT IMAGES **/
