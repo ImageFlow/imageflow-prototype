@@ -1,8 +1,27 @@
 var app = angular.module('imageflow', [ 'ngRoute' ]);
 
-app.run( function() {
-
-});
+app.run(['$rootScope', '$location', 'shared', 'currentImage',
+    function($rootScope, $location, shared, currentImage) {
+        /**
+         * Listen to the modal close event
+         * and reset the route to make sure
+         * the "Add Media" will trigger
+         * the modal again in-case the modal
+         * is closed on bg click.
+         * and reset the shared.uploaded to false
+         **/
+        $(document).on('close.fndtn.reveal', '[data-reveal]',
+            function(){
+                /* Reset the location path */
+                if($location.path() != '/') {
+                    $rootScope.$apply(function () {
+                        $location.path('/');
+                    });
+                }
+            }
+        );
+    }
+]);
 
 /** ROUTES **/
 app.config( function( $routeProvider ) {
@@ -181,24 +200,6 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     $scope.soon = function(){
         shared.soon();
     }
-
-    /**
-     * Listen to the modal close event
-     * and reset the route to make sure
-     * the "Add Media" will trigger
-     * the modal again in-case the modal
-     * is closed on bg click.
-     **/
-    $(document).on('close.fndtn.reveal', '[data-reveal]',
-        function(){
-            if($location.path() != '/') {
-                $scope.$apply(function () {
-                    $location.path('/');
-                });
-            }
-        }
-    );
-
 }]);
 app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
