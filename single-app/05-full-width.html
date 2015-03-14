@@ -1,7 +1,7 @@
 <ng-include src="'assets/js/templates/modalNav-fw.html?v=2.1.6'"></ng-include>
 <div class="row" id="media-frame-content">
     <div class="small-12 columns" id="full-width-area">
-        <div class="card-container" ng-repeat="image in images track by $index" ng-if="$index!=0" data-index="{{$index}}" on-last-repeat>
+        <div class="card-container" ng-repeat="image in images track by $index" data-index="{{$index}}" on-last-repeat>
             <div class="flipper">
                 <div class="fullwidth-wrap front">
                     <div class="image">

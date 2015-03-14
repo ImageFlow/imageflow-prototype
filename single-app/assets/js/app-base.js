@@ -18,6 +18,8 @@ app.run(['$rootScope', '$location', 'shared', 'currentImage',
                         $location.path('/');
                     });
                 }
+                /* Reset the uploaded image */
+                shared.uploaded = false;
             }
         );
     }
@@ -52,7 +54,7 @@ app.config( function( $routeProvider ) {
 /** GLOBAL VAR FOR CURRENT IMAGES **/
 app.service('currentImage', function() {
     this.images = [];
-})
+});
 
 app.service('shared', function(){
     this.soon = function(){
@@ -69,17 +71,24 @@ app.service('shared', function(){
     this.selectImage = function(image){
         selected.push(image);
     }
-})
+
+    /* Used to check the uploaded image */
+    this.uploaded = false;
+
+});
 
 /**
- * Directive to watch the images
- * already selected on the grid
+ * Directive to watch the uploaded image and
+ * the images already selected on the grid
  * and keep it consistent with other views
  */
-app.directive('imageWatcher',['currentImage',
-    function(currentImage) {
+app.directive('imageWatcher',['currentImage', 'shared',
+    function(currentImage, shared) {
         return {
             link: function (scope, element, attrs) {
+                /**
+                 * Keep selected images consistent
+                 */
                 /* Check the array first */
                 if(currentImage.images.length > 0) {
                     /* Watch the img src when it gets resolved */
@@ -97,6 +106,14 @@ app.directive('imageWatcher',['currentImage',
                     if(scope.$last)
                         scope.showFooter();
                 }
+
+                /**
+                 * Keep uploaded image consistent
+                 */
+                /* Check the current img index and the uploaded value */
+                if(attrs.index == 0 && !shared.uploaded)
+                /* Hide it if uploaded is false */
+                    element.addClass('hide');
             }
         }
     }
@@ -203,6 +220,7 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
         shared.soon();
     }
 }]);
+
 app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
     $('body').on('insertImages', function() {
@@ -214,6 +232,7 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared
     });
 
 }]);
+
 app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
     //$rootScope.secondtime = 1;
@@ -227,6 +246,7 @@ app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', 'shared',
     }
 
 }]);
+
 app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
     //$rootScope.secondtime = 1;
@@ -234,6 +254,11 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     $scope.selectedImages = currentImage;
 
     $scope.modalTitle = 'Select Media';
+
+    /**
+     * Here we should switch the shared.uploaded to true
+     */
+    shared.uploaded = true;
 
     $http.get('assets/js/data.json').then(function(res){
         $scope.images = res.data.images;
@@ -457,6 +482,14 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 
     $http.get('assets/js/data.json').then(function(res){
         $scope.images = res.data.images;
+        /**
+         * Here we should check if to
+         * include the uploaded image or not
+         * as we are also showing the images count,
+         * hiding it is not enough
+         */
+        if(!shared.uploaded)
+            $scope.images.splice(0, 1);
     });
 
 

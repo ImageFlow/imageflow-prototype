@@ -7,7 +7,7 @@
             </div>
         </div>
 
-        <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-if="$index!=0" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}" image-watcher="image.large">
+        <div class="grid-wrap small-4 medium-3 large-2 columns" ng-repeat="image in images track by $index" ng-click="imageSelect( $index, $event )" data-index="{{ $index }}" image-watcher="image.large">
             <div class="image-wrap">
                 <i class="fa fa-check-square-o"></i>
                 <img src="{{image.large}}">
