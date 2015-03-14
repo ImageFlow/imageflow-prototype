@@ -71,13 +71,10 @@ app.directive('imageWatcher',['currentImage',
                             /* Image was already selected so let's make it appear as one */
                             element.addClass('selected').find('i').toggle();
                         }
-                        /*
-                         * Call showFooter() but only once
-                         */
-                        if(scope.$parent.$last)
-                            scope.showFooter();
-
                     });
+                    /* Call showFooter() but only once */
+                    if(scope.$last)
+                        scope.showFooter();
                 }
             }
         }
