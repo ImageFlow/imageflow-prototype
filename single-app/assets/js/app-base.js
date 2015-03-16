@@ -1,8 +1,29 @@
 var app = angular.module('imageflow', [ 'ngRoute' ]);
 
-app.run( function() {
-
-});
+app.run(['$rootScope', '$location', 'shared', 'currentImage',
+    function($rootScope, $location, shared, currentImage) {
+        /**
+         * Listen to the modal close event
+         * and reset the route to make sure
+         * the "Add Media" will trigger
+         * the modal again in-case the modal
+         * is closed on bg click.
+         * and reset the shared.uploaded to false
+         **/
+        $(document).on('close.fndtn.reveal', '[data-reveal]',
+            function(){
+                /* Reset the location path */
+                if($location.path() != '/') {
+                    $rootScope.$apply(function () {
+                        $location.path('/');
+                    });
+                }
+                /* Reset the uploaded image */
+                shared.uploaded = false;
+            }
+        );
+    }
+]);
 
 /** ROUTES **/
 app.config( function( $routeProvider ) {
@@ -26,12 +47,14 @@ app.config( function( $routeProvider ) {
         templateUrl: '05-full-width.html',
         controller: 'fullWidthCtrl',
     });
+    /* Default to root */
+    $routeProvider.otherwise('/');
 })
 
 /** GLOBAL VAR FOR CURRENT IMAGES **/
 app.service('currentImage', function() {
     this.images = [];
-})
+});
 
 app.service('shared', function(){
     this.soon = function(){
@@ -48,17 +71,24 @@ app.service('shared', function(){
     this.selectImage = function(image){
         selected.push(image);
     }
-})
+
+    /* Used to check the uploaded image */
+    this.uploaded = false;
+
+});
 
 /**
- * Directive to watch the images
- * already selected on the grid
+ * Directive to watch the uploaded image and
+ * the images already selected on the grid
  * and keep it consistent with other views
  */
-app.directive('imageWatcher',['currentImage',
-    function(currentImage) {
+app.directive('imageWatcher',['currentImage', 'shared',
+    function(currentImage, shared) {
         return {
             link: function (scope, element, attrs) {
+                /**
+                 * Keep selected images consistent
+                 */
                 /* Check the array first */
                 if(currentImage.images.length > 0) {
                     /* Watch the img src when it gets resolved */
@@ -71,14 +101,19 @@ app.directive('imageWatcher',['currentImage',
                             /* Image was already selected so let's make it appear as one */
                             element.addClass('selected').find('i').toggle();
                         }
-                        /*
-                         * Call showFooter() but only once
-                         */
-                        if(scope.$parent.$last)
-                            scope.showFooter();
-
                     });
+                    /* Call showFooter() but only once */
+                    if(scope.$last)
+                        scope.showFooter();
                 }
+
+                /**
+                 * Keep uploaded image consistent
+                 */
+                /* Check the current img index and the uploaded value */
+                if(attrs.index == 0 && !shared.uploaded)
+                /* Hide it if uploaded is false */
+                    element.addClass('hide');
             }
         }
     }
@@ -184,25 +219,8 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     $scope.soon = function(){
         shared.soon();
     }
-
-    /**
-     * Listen to the modal close event
-     * and reset the route to make sure
-     * the "Add Media" will trigger
-     * the modal again in-case the modal
-     * is closed on bg click.
-     **/
-    $(document).on('close.fndtn.reveal', '[data-reveal]',
-        function(){
-            if($location.path() != '/') {
-                $scope.$apply(function () {
-                    $location.path('/');
-                });
-            }
-        }
-    );
-
 }]);
+
 app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
     $('body').on('insertImages', function() {
@@ -214,6 +232,7 @@ app.controller( 'textAreaCtrl', ['$rootScope', '$scope', 'currentImage', 'shared
     });
 
 }]);
+
 app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
     //$rootScope.secondtime = 1;
@@ -227,6 +246,7 @@ app.controller( 'sourceCtrl', ['$rootScope', '$scope', 'currentImage', 'shared',
     }
 
 }]);
+
 app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'shared', '$http', '$location', function( $rootScope, $scope, currentImage, shared, $http, $location ) {
 
     //$rootScope.secondtime = 1;
@@ -234,6 +254,11 @@ app.controller( 'uploadingCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     $scope.selectedImages = currentImage;
 
     $scope.modalTitle = 'Select Media';
+
+    /**
+     * Here we should switch the shared.uploaded to true
+     */
+    shared.uploaded = true;
 
     $http.get('assets/js/data.json').then(function(res){
         $scope.images = res.data.images;
@@ -457,6 +482,14 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 
     $http.get('assets/js/data.json').then(function(res){
         $scope.images = res.data.images;
+        /**
+         * Here we should check if to
+         * include the uploaded image or not
+         * as we are also showing the images count,
+         * hiding it is not enough
+         */
+        if(!shared.uploaded)
+            $scope.images.splice(0, 1);
     });
 
 
