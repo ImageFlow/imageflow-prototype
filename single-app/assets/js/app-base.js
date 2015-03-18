@@ -216,6 +216,10 @@ app.controller( 'mediaGridCtrl', ['$rootScope', '$scope', 'currentImage', 'share
         $scope.selectedImages.images = [];
     }
 
+    $scope.fullView = function(){
+        $location.path('/fullWidth');
+    }
+
     $scope.soon = function(){
         shared.soon();
     }

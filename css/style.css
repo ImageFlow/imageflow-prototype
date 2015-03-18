@@ -291,7 +291,7 @@ div#tinyMCE {
 	/*border: solid 1px white;*/
 	/*margin-left: 100px;*/
 	-webkit-backface-visibility: inherit;
-	backface-visibility: inherit;
+	backface-visibility: hidden;
 }
 .fullwidth-wrap.transi{
 	transition: all 1s ease 0s;
@@ -300,6 +300,7 @@ div#tinyMCE {
 }
 
 .fullwidth-wrap i{
+	backface-visibility: hidden;
 	position: absolute;
 	bottom: .5em;
 	left: .5em;
@@ -315,6 +316,7 @@ div#tinyMCE {
 	color: #2ea2cc;
 }
 .fw-image-wrap{
+	backface-visibility: hidden;
 	background: #eee;
 	width: 100%;
 	height: 100%;
@@ -335,9 +337,11 @@ div#tinyMCE {
 	width:auto;
 }
 .fw-image-wrap i{
+	backface-visibility: hidden;
 	display: none;
 }
 .fw-selected i{
+	backface-visibility: hidden;
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -353,7 +357,7 @@ div#tinyMCE {
 	color: #2ba6cb;
 	text-align: center;
 	font-weight: bold;
-	bottom: 1.5em;
+	bottom: .75rem;
 }
 
 .selected-pic-actions {
@@ -447,10 +451,12 @@ div#tinyMCE {
         padding: 0px;
     }
     .fullwidth-wrap i {
+	backface-visibility: hidden;
         position: absolute;
         font-size: 3.5rem;
     }
     .fullwidth-wrap.selected i{
+	backface-visibility: hidden;
         position: absolute;
         bottom: 40px;
         left: 40px;
@@ -467,9 +473,6 @@ div#tinyMCE {
         bottom: 60px !important;
         left: 100px;
         font-size: 30px;        
-    }  
-    #slidertext {
-        bottom: 1.5em;
     }
     #slidertext a.left-arrow{
 	float: left;
@@ -503,6 +506,7 @@ div#tinyMCE {
 
 /*Meta Data View, Full Width*/
 .card-container {
+	-moz-perspective: 1000px;
 	perspective: 1000px;
 	width: 100%;
 }

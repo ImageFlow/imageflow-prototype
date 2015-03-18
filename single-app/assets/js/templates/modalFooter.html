@@ -13,7 +13,7 @@
         <div class="text-center icon-button" id="cg-button" ng-class="{'grow': selectedImages.images.length > 1}" ng-click="soon()">
             <i class="fa fa-th" id="gallery-button" ng-show="selectedImages.images.length > 1"></i> <label for="Create Gallery" ng-show="selectedImages.images.length > 1">Create Gallery</label>
         </div>
-        <div class="text-center icon-button" id="fw-button" ng-class="{'shrink': selectedImages.images.length > 1}">
+        <div class="text-center icon-button" id="fw-button" ng-class="{'shrink': selectedImages.images.length > 1}" ng-click="fullView()">
             <a href="#/fullWidth"><i class="fa fa-file-image-o" id="view-button"></i> <label for="view-button">View</label></a>
         </div>
         <div class="text-center important-icon-button" id="in-button" ng-class="{'shrink': selectedImages.images.length > 1}" ng-click="insertImages()">
