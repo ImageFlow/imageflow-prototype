@@ -383,15 +383,18 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 
         //Size adjust
         mediamodalheight = parseInt( $('#media-modal').css("height") );
-        aux = mediamodalheight-132-40;
+	console.log(mediamodalheight);
+        aux = mediamodalheight-130-40;
 
         positioncount= 0;
 
         $('div.fullwidth-wrap img').each(function(index, value) {
             var obj = $(this).parents('div.card-container');
             var selector = $(this).parents('div.fullwidth-wrap');
+	    var back = selector.siblings('.back');
             if($.inArray($(this).attr('src'),currentImage.images)>-1){
                 selector.toggleClass('selected');
+		back.toggleClass('selected');
                 $(this).siblings('i.fa').css("display","block");
                 var m = currentImage.images.length;
                 if( m > 0 ) {
@@ -425,6 +428,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
 
         $('.fw-image-wrap').css("height",aux);
         $('.fullwidth-wrap').css("height",aux);
+	$('#full-width-area').css("height",(aux+20));
         $('div.metawrap div.meta').css("height",aux);
         $('.meta-wrap').css("height",aux);
         $('#cg-button').css("display", "inline");
@@ -525,6 +529,7 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
          * as we are already handling the add or remove from the array
          */
         $('[data-index="'+index+'"]').find('.fullwidth-wrap').toggleClass('selected');
+	$('[data-index="'+index+'"]').find('.meta-wrap').toggleClass('selected');
 
         $scope.showFooter();
     }
