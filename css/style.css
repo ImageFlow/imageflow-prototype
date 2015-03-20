@@ -127,47 +127,72 @@ div#tinyMCE {
 	float: left;
 }
 
-#fw-button, #in-button, #m-button{
+#fw-button, #in-button{
 	-webkit-transition: 0.1s linear all;
 	transition: 0.1s linear all;
-	width: 33%;
+	width: 45%;
 }
 
-#fw-button.shrink, #in-button.shrink, #m-button.shrink{
-	width: 25%;
+#m-button.icon-button{
+	-webkit-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	width: 10%;
+	background: #fff;
+}
+
+#m-button.icon-button label{
+	-webkit-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	background: #fff;
+}
+
+#fw-button.shrink, #in-button.shrink{
+	width: 30%;
 }
 
 #cg-button{
 	-webkit-transition: 0.1s linear all;
 	transition: 0.1s linear all;
 	width: 0%;
-	height: 60px;
+	overflow: hidden;
+}
+
+#cg-button i {
+	color: #2ea2cc;
+}
+
+#cg-button.icon-button, #cg-button.icon-button label{
+	background: #ddd;
 }
 
 #cg-button.grow{
-	width: 25%;
+	width: 30%;
 }
 
 
-.fw-footer #in-button, .fw-footer #m-button{
+.fw-footer #in-button{
 	-webkit-transition: 0.1s linear all;
 	transition: 0.1s linear all;
-	width: 50%;
+	width: 90%;
+}
+.fw-footer #m-button{
+	-webkit-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	width: 10%;
 }
 
-.fw-footer #in-button.shrink, .fw-footer #m-button.shrink{
-	width: 33%;
+.fw-footer #in-button.shrink{
+	width: 45%;
 }
 
 .fw-footer #cg-button{
 	-webkit-transition: 0.1s linear all;
 	transition: 0.1s linear all;
 	width: 0%;
-	height: 60px;
 }
 
 .fw-footer #cg-button.grow{
-	width: 33%;
+	width: 45%;
 }
 
 #insert-button{
@@ -553,10 +578,11 @@ div#tinyMCE {
     }
     #cg-button{
 	font-size: 0.6em;
+	overflow: hidden;
     }
-    #cg-button label {
-        font-size: .85rem;
-	line-height: 0.8;
+    .icon-button label {
+        font-size: .75rem;
+	line-height: 1.5;
     }
     .meta-wrap {
 	-webkit-backface-visibility: hidden;

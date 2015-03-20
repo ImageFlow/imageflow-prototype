@@ -3,13 +3,13 @@
         <span id="selected-items" ng-show="selectedImages.images.length > 1" class="small"></span> <br />
         <span class="small" id="clear" ng-click="deSelect()">Clear Selection</span>
     </div>
-    <div class="medium-4 columns hide-for-small">
+    <div class="medium-6 columns hide-for-small">
         <div id="thumb-wrap">
             <img ng-repeat="image in selectedImages.images track by $index"  src="{{image}}" style="max-height:54px !important; margin: 3px;" />
         </div>
     </div>
 
-    <div id="buttons" class="medium-6 columns">
+    <div id="buttons" class="medium-4 columns">
         <div class="text-center icon-button" id="cg-button" ng-class="{'grow': selectedImages.images.length > 1}" ng-click="soon()">
             <i class="fa fa-th" id="gallery-button" ng-show="selectedImages.images.length > 1"></i> <label for="Create Gallery" ng-show="selectedImages.images.length > 1">Create Gallery</label>
         </div>
