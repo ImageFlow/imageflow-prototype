@@ -4,7 +4,7 @@
         <span class="small" id="clear" ng-click="deSelect()">Clear Selection</span>
     </div>
     <div class="medium-4 columns hide-for-small">
-        <div id="thumb-wrap">
+        <div id="thumb-wrap">    
             <img ng-repeat="image in selectedImages.images track by $index"  src="{{image}}" style="max-height:54px !important; margin: 3px;" />
         </div>
     </div>

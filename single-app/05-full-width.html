@@ -3,19 +3,7 @@
     <div class="small-12 columns" id="full-width-area">
         <div class="card-container" ng-repeat="image in images track by $index" data-index="{{$index}}" on-last-repeat>
             <div class="flipper">
-                <div class="fullwidth-wrap front">
-                    <div class="image">
-                        <div class="row">
-                            <div class="small-12 small-centered medium-10 columns">
-                                <div class="fw-image-wrap" ng-click="imageSelect( $index, $event )">
-                                    <i class="fa fa-check-square-o"></i>
-                                    <img src="{{image.large}}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="meta-wrap back small-12 medium-10 small-centered columns">
+                <div class="meta-wrap front small-12 medium-10 small-centered columns">
                     <div class="row">
                         <div class="columns small-12 text-left">
                             <h3>Edit Metadata</h3>
@@ -70,6 +58,18 @@
                                         <option selected="selected">Full Size</option>
                                     </select>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+		<div class="fullwidth-wrap back">
+                    <div class="image">
+                        <div class="row">
+                            <div class="small-12 small-centered medium-10 columns">
+                                <div class="fw-image-wrap" ng-click="imageSelect( $index, $event )">
+                                    <i class="fa fa-check-square-o"></i>
+                                    <img src="{{image.large}}">
+                                </div>
                             </div>
                         </div>
                     </div>

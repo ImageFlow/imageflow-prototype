@@ -391,10 +391,10 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
         $('div.fullwidth-wrap img').each(function(index, value) {
             var obj = $(this).parents('div.card-container');
             var selector = $(this).parents('div.fullwidth-wrap');
-	    var back = selector.siblings('.back');
+	    var front = selector.siblings('.front');
             if($.inArray($(this).attr('src'),currentImage.images)>-1){
                 selector.toggleClass('selected');
-		back.toggleClass('selected');
+		front.toggleClass('selected');
                 $(this).siblings('i.fa').css("display","block");
                 var m = currentImage.images.length;
                 if( m > 0 ) {
@@ -581,22 +581,27 @@ app.controller( 'fullWidthCtrl', ['$rootScope', '$scope', 'currentImage', 'share
     }
 
     $scope.flip = function(e){
-        if($(e.target).is('div#meta-data-view')){
-		console.log('i am');
-	}
-	var obj = $(e.target).is('div#meta-data-view') ? $(e.target) : $(e.target).parents('div#meta-data-view');
-        if (obj.hasClass('toggled')) {
-            $(".flipper").velocity('reverse');
-            obj.removeClass('toggled');
-        } else {
-            obj.addClass('toggled');
-            $(".flipper").velocity({ rotateY: "180deg"}, 1000);
+        if ($(e.target).is('div#meta-data-view') || $(e.target).parents('div#meta-data-view').length > 0) {
+	    obj = $(e.target).is('div#meta-data-view') ? $(e.target) : $(e.target).parents('div#meta-data-view');
+            if (obj.hasClass('toggled')) {
+		return;
+	    }
+	    obj.addClass('toggled');
+	    obj.siblings().removeClass('toggled');
+	    $('#crop, #rotate, #flip-h, #flip-v').addClass('disabled');
+	    $(".flipper").velocity('reverse');
+
+        } else if($(e.target).is('div#edit-view') || $(e.target).parents('div#edit-view').length > 0) {
+	    obj = $(e.target).is('div#edit-view') ? $(e.target) : $(e.target).parents('div#edit-view');
+            if (obj.hasClass('toggled')) {
+		return;
+	    }
+	    obj.addClass('toggled');
+	     obj.siblings().removeClass('toggled');
+	     obj.siblings().removeClass('disabled');
+           $(".flipper").velocity({ rotateY: "180deg"}, 1000);
+
         }
     }
-
-    /*$scope.gobackgrid = function() {
-     $scope.saveselectedimages = 1 ;
-     window.location.href = "http://imageflow.pabloperea.com/single-app/#/mediaGrid";
-     }*/
 
 }]);

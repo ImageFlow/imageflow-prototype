@@ -458,6 +458,23 @@ div#tinyMCE {
 	transition: all 1s ease 0s;
 }
 
+#tools div{
+	line-height: 2.4;
+	padding: 0;
+	margin: 0;
+}
+
+#tools label{
+	line-height: 0;
+	margin: -.3em 0 0;
+	padding: 0;
+	font-size: .75em;
+}
+
+#tools div.disabled label, #tools div.disabled i{
+	color: #CCC;
+}
+
 /*Upload Page*/
 #upload-area, #mobile-upload{
 	padding: 2rem 1rem 5rem;
@@ -505,7 +522,7 @@ div#tinyMCE {
 	transform: rotateY(180deg);
 }
 
-#meta-data-view.toggled i, #meta-data-view.toggled label{
+.toggled i, .toggled label{
 	color: #2ea2cc;
 }
 
